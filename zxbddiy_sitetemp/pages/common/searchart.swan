@@ -1,0 +1,13 @@
+<view class="zan-popup zan-popup--right {{showRightPopupart?'zan-popup--show':''}}">
+    <view class="soearch_box item_cell_box">
+        <view class="soearch_box_in item_cell_box item_cell_flex">
+            <view class="zan-icon zan-icon-search"></view>
+            <input bindconfirm="tosearchart" bindinput="searchinputart" class="item_cell_flex soearch_box_input" confirmType="search" focus="{{searchfocusart}}" maxlength="40" name="for" placeholder="输入内容" type="text" />
+        </view>
+        <view bindtap="tosearchart" class="soearch_box_btn">搜索</view>
+    </view>
+    <view class="search_hist"></view>
+    <view class="zan-btns popup_close_btn">
+        <button bindtap="toggleRightPopupart" class="zan-btn zan-btn--disabled">关闭</button>
+    </view>
+</view>

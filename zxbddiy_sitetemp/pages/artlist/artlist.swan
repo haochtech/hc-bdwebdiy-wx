@@ -1,0 +1,47 @@
+<view class="page">
+    <view class="page_artlist_head" s-if="{{artsort.length>0&&ishidesort==0&&!page.pdata.for}}">
+        <view class="artlist_head item_cell_box">
+            <view catchtap="changeSort" class="art_head_item {{page.pdata.actsort==0?'art_act':''}}" data-id="0" style="{{page.pdata.actsort==0?'border-bottom:2px solid '+(bar.maincolor?bar.maincolor:'#ff5f27'):''}}">全部</view>
+            <view catchtap="changeSort" class="art_head_item {{page.pdata.actsort==item.id?'art_act':''}}" data-id="{{item.id}}" style="{{page.pdata.actsort==item.id?'border-bottom:2px solid '+(bar.maincolor?bar.maincolor:'#ff5f27'):''}}" s-for="{{artsort}}">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="pagelist mt10" style="margin-top: {{artsort.length>0&&ishidesort==0&&!page.pdata.for?'100rpx':0}}">
+        <block  s-for="{{datalist}}">
+        <view class="art_list_item {{sets.artstyle==2?'art_list_itemb':''}}" s-if="{{datalist.length>0}}">
+            <view catchtap="toarticle" class="item_cell_box art_item_in" data-url="{{item.url}}" s-if="{{sets.artstyle==0}}">
+                <view class="art_item_l">
+                    <image mode="widthFix" src="{{item.img}}"></image>
+                </view>
+                <view class="item_cell_flex art_item_r">
+                    <view class="art_list_title">{{item.title}}</view>
+                    <view class="art_list_time item_cell_box">
+                        <view>{{item.time}}</view>
+                    </view>
+                </view>
+            </view>
+            <view catchtap="toarticle" class="item_cell_box art_itema_in" data-url="{{item.url}}" s-if="{{sets.artstyle==1}}">
+                <view class="art_itema_l item_cell_flex">
+					{{item.title}}
+				</view>
+                <view class="art_itema_r">
+					{{item.time}}
+				</view>
+            </view>
+            <view catchtap="toarticle" class="art_itemb_in" data-url="{{item.url}}" s-if="{{sets.artstyle==2}}">
+                <view class="art_itemb_top">
+                    <image src="{{item.img}}"></image>
+                </view>
+                <view class="art_itemb_bot">
+					{{item.title}}
+				</view>
+            </view>
+        </view>
+        </block>
+    </view>
+    <view class="pagelist_nodata" s-if="{{datalist.length<=0}}">没有数据</view>
+    <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+    <view class="pagelist_wait {{page.waitf?'show':''}}">
+        <image src="/images/loading.gif"></image>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

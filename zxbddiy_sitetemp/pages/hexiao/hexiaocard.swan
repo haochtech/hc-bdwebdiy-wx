@@ -1,0 +1,38 @@
+<view s-if="{{card}}">
+    <view class="page">
+        <view class="orderinfo_goods mt20">
+            <view catchtap="navigateto" class="zan-card orderlist_mid_item" data-url="{{card.url}}">
+                <view class="zan-card__thumb">
+                    <image class="zan-card__img" mode="aspectFit" src="{{card.thumb}}"></image>
+                </view>
+                <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                        <view class="zan-card__right-col" s-if="{{card.type==0}}">¥ {{card.value*100/100}}</view>
+                        <view class="zan-card__right-col" s-if="{{card.type==1}}">{{card.value*100/100}} 折</view>
+                        <view class="zan-card__left-col zan-ellipsis--l2 orderlist_goods_title">
+			             	{{card.name}}
+			          	</view>
+                    </view>
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                        <view class="zan-card__right-col"></view>
+                        <view class="zan-card__left-col orderinfo_goods_rule">
+			            	满{{card.useleast*100/100}} 可用
+			          	</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20">
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">卡券面值</view>
+                <view s-if="{{card.type==0}}">￥ {{card.value}}</view>
+                <view s-if="{{card.type==1}}">{{card.value*100/100}} 折</view>
+            </view>
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">使用条件</view>
+                <view>满{{card.useleast*100/100}} 可用</view>
+            </view>
+        </view>
+        <view bindtap="{{card.status==0?'hexiao':''}}" class="my_btn {{card.status==0?'':'my_btn_default'}}">{{card.status==0?'核销卡券':'卡券已使用'}}</view>
+    </view>
+</view>

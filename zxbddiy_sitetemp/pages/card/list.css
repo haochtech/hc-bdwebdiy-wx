@@ -1,0 +1,73 @@
+.page {
+    background-color: #eee;
+}
+
+.pagelist {
+    padding: 20rpx;
+}
+
+.mycard_item {
+    padding: 40rpx 20rpx;
+    background-color: #fff;
+    position: relative;
+    font-size: 28rpx;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+    margin-bottom: 20rpx;
+}
+
+.mycard_item_in {
+    align-items: center;
+}
+
+.mycard_icon {
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    background-color: #eee;
+    left: -25rpx;
+    top: 80rpx;
+}
+
+.mycard_item_l {
+    width: 150rpx;
+    text-align: right;
+}
+
+.mycard_item_m {
+    width: 300rpx;
+    text-align: left;
+    padding-left: 20rpx;
+}
+
+.mycard_btn {
+    text-align: center;
+    color: #ffaa59;
+    border: 1px solid #ffaa59;
+    padding: 3rpx 20rpx;
+}
+
+.mycard_value {
+    color: #ffaa59;
+    font-size: 26rpx;
+    height: 70rpx;
+}
+
+.mycard_value text {
+    font-size: 44rpx;
+}
+
+.mycard_type {
+    color: #ffaa59;
+    height: 45rpx;
+}
+
+.mycard_use {
+    height: 70rpx;
+    font-size: 35rpx;
+}
+
+.mycard_time {
+    height: 45rpx;
+    color: #999;
+}

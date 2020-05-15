@@ -1,0 +1,73 @@
+{
+    "appInfo": {
+        "app_key": "WTNm9YlQVuPpbzPBaMVznwp6YGO1rUfc",
+        "app_name": "智享工场",
+        "app_photo": "https://b.bdstatic.com/searchbox/mappconsole/image/20180928/1538101181-17270.png",
+        "domains": {
+            "downloadFile": [
+                "https://baiduxcx.zx-app.cn"
+            ],
+            "request": [
+                "https://baiduxcx.zx-app.cn"
+            ],
+            "socket": [
+                "wss://baiduxcx.zx-app.cn"
+            ],
+            "uploadFile": [
+                "https://baiduxcx.zx-app.cn"
+            ]
+        },
+        "isExistsPackage": true,
+        "isTp": false,
+        "needWeb": false,
+        "webAction": [
+            "swan/navigateTo",
+            "swan/navigateBack",
+            "swan/switchTab",
+            "swan/reLaunch",
+            "swan/redirectTo",
+            "swan/postMessage",
+            "swan/previewImage",
+            "swan/getLocation"
+        ],
+        "webview_domains": []
+    },
+    "appid": "16722331",
+    "appkey": "WTNm9YlQVuPpbzPBaMVznwp6YGO1rUfc",
+    "compilation-args": {
+        "options": [],
+        "selected": -1
+    },
+    "condition": {
+        "swan": {
+            "current": -1,
+            "list": [
+                {
+                    "dependencyGraph": true,
+                    "name": "文章",
+                    "pathName": "zxbddiy_sitetemp/pages/page/page",
+                    "query": "pid=1",
+                    "scene": ""
+                }
+            ]
+        }
+    },
+    "developType": "normal",
+    "host": "baiduboxapp",
+    "libVersion": "2.0.27",
+    "preview": {
+        "packageId": 271497
+    },
+    "publish": {
+        "version": "1.0.2.0"
+    },
+    "setting": {
+        "urlCheck": false
+    },
+    "swan": {
+        "baiduboxapp": {
+            "extensionJsVersion": "1.7.3",
+            "swanJsVersion": "3.120.7"
+        }
+    }
+}

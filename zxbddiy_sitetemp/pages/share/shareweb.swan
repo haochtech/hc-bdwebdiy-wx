@@ -1,0 +1,3 @@
+<view>
+    <button class="share" openType="share">{{btnname}}</button>
+</view>

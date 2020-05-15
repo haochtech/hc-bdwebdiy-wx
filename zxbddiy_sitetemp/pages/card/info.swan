@@ -1,0 +1,56 @@
+<view s-if="{{card}}">
+    <view class="page " style="background-color: {{sets.cardbg}}">
+        <view class="card_info">
+            <image class="card_shopimg" src="{{sets.cardimg}}"></image>
+            <view class="card_shopname">{{sets.cardname}}</view>
+            <view class="card_value" style="color:{{sets.cardbg}}">
+                <view s-if="{{card.type==0}}">
+					￥<text>{{card.value*100/100}}</text>
+                </view>
+                <view s-if="{{card.type==1}}">
+                    <text>{{card.value*100/100}}</text>折
+				</view>
+            </view>
+            <view class="card_title">
+                <text>{{card.name}}</text>
+            </view>
+            <view class="card_use">
+                <text>使用条件：</text>消费满{{card.useleast*100/100}}元可用。
+			</view>
+            <view class="card_time">
+                <text>可用时间：</text>{{card.start}}-{{card.end}}
+			</view>
+            <view class="tel_box item_cell_box" s-if="{{card.usetype==0}}">
+                <view bindtap="location" class="item_cell_flex tel_icon_l" data-addname="{{sets.cardname}}" data-address="{{sets.cardaddress}}" data-lat="{{sets.cardlat}}" data-lng="{{sets.cardlng}}">
+                    <view class="add_shopname">{{sets.cardname}}</view>
+                    <view class="add_shopinfo">{{sets.cardaddress}}</view>
+                </view>
+                <view bindtap="callphone" class="tel_icon" data-tel="{{sets.cardtel}}">
+                    <image src="/images/tel.png"></image>
+                </view>
+            </view>
+            <view bindtap="getcard" class="my_btn get_card_btn {{status==1||status==3&&card.usetype==0?'':'btn_default'}}" style="background-color: {{sets.cardbg}}">
+				{{status==1?'领取卡券':''}}
+				{{status==2?'你已经领取':''}}
+				{{status==3&&card.usetype==0?'立即使用':''}}
+				{{status==3&&card.usetype>0?'你已经领取':''}}
+			</view>
+        </view>
+        <block s-if="{{card.content}}">
+            <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+            <view class="card_info_box">
+                <view class="goodinfo_body">
+                    <template is="bdParse" data="{{bdParseData:card.content.nodes}}"></template>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="zan-popup zan-popup--right {{showRightPopup?'zan-popup--show':''}}" style="background-color: {{sets.cardbg}}">
+        <view class="qrcode_img">
+            <image src="{{qrcode}}"></image>
+        </view>
+        <view class="zan-btns popup_close_btn">
+            <button bindtap="toggleRightPopup" class="zan-btn zan-btn--disabled">关闭</button>
+        </view>
+    </view>
+</view>

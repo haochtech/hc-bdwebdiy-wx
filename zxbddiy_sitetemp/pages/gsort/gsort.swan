@@ -1,0 +1,43 @@
+<view class="gsort_page" s-if="{{allsort}}">
+    <view class="gsort_top">
+        <view bindtap="toggleRightPopup" class="gsort_top_box">
+            <view class="zan-icon zan-icon-search">
+                <text class="top_search_icon">搜索商品</text>
+            </view>
+        </view>
+    </view>
+    <view class="item_cell_box gsort_bot" s-if="{{sets.sorttype==0}}">
+        <scroll-view scrollY class="gsort_l" scrollIntoView="{{toViewl}}" scrollTop="{{lTop}}" scrollWithAnimation="true">
+            <view bindtap="changeSort" class="gsort_l_item {{index==0&&actsort==0||item.id==actsort?'gsort_l_act':''}}" data-id="{{item.id}}" id="gsort_l_item{{item.id}}" style="color:{{index==0&&actsort==0||item.id==actsort?bar.maincolor?bar.maincolor:'#ed414a':''}};{{index==0&&actsort==0||item.id==actsort?'border-left:2px solid '+(bar.maincolor?bar.maincolor:'#ed414a'):''}}" s-for="{{allsort}}">
+				{{item.name}}
+			</view>
+            <view class="gsort_l_bot"></view>
+        </scroll-view>
+        <scroll-view scrollY class="gsort_r" scrollIntoView="{{toView}}" scrollWithAnimation="true">
+            <block  s-for="{{allsort}}">
+            <view class="gsort_r_item " data-id="{{item.id}}" id="gsort_r_item{{item.id}}" s-if="{{item.down.length>0}}">
+                <view bindtap="togoodlist" class="gsort_item_title" data-id="{{item.id}}" data-name="{{item.name}}" data-type="1">
+                    <text class="fr sortone_more">查看全部</text>
+                </view>
+                <view bindtap="togoodlist" class="gsort_item_in" data-id="{{in.id}}" data-name="{{in.name}}" data-type="2" s-for="{{item.down}}" s-for-item="in">
+                    <image lazyLoad="true" src="{{in.img}}"></image>
+                    <view class="gsort_item_name">{{in.name}}</view>
+                </view>
+            </view>
+            </block>
+            <view class="gsort_l_bot"></view>
+        </scroll-view>
+    </view>
+    <view class="sort_two" style="overflow: hidden;padding-bottom:150rpx;" s-if="{{sets.sorttype==1}}">
+        <block s-for="{{allsort}}">
+        <block s-if="{{item.down.length>0}}">
+            <view bindtap="togoodlist" class="gsort_item_in" data-id="{{in.id}}" data-name="{{in.name}}" data-type="2" s-for="{{item.down}}" s-for-item="in">
+                <image lazyLoad="true" src="{{in.img}}"></image>
+                <view class="gsort_item_name">{{in.name}}</view>
+            </view>
+        </block>
+        </block>
+    </view>
+    <include src="/zxbddiy_sitetemp/pages/common/search.swan"></include>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

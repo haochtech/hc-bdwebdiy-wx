@@ -1,0 +1,34 @@
+<view class="page">
+    <view class="">
+        <view class="pagelist">
+            <view class="appoint_list" s-if="{{datalist.length>0}}" s-for="{{datalist}}">
+                <view bindtap="navigateto" class="appoint_item" data-url="{{item.url}}">
+                    <view class="appoint_top item_cell_box">
+                        <view class="appoint_head">
+                            <image src="{{item.thumb}}"></image>
+                        </view>
+                        <view class="appoint_info item_cell_flex">
+                            <view class="appoint_name">{{item.name}}</view>
+                            <view class="appoint_desc">{{item.desc}}</view>
+                        </view>
+                        <view class="appoint_price">
+                            <view s-if="{{item.ispay==1}}">
+								￥ <text class="appoint_pricenum">{{item.price*100/100}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="appoint_bot item_cell_box">
+                        <view class="appoint_data item_cell_flex">已被约：{{item.num}}</view>
+                        <view class="appoint_btn">预约</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

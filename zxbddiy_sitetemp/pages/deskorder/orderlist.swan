@@ -1,0 +1,77 @@
+<import src="../../resource/zan-ui/tab/index.swan"></import>
+<import src="../../resource/zan-ui/steps/index.swan"></import>
+<view class="page">
+    <view class="orderlist_top">
+        <template is="zan-tab" data="{{tab:tab,componentId:'tab'}}"></template>
+    </view>
+    <view class="goodlist_goodbox">
+        <view class="pagelist">
+            <block s-for="{{datalist}}">
+            <view class="orderlist" s-if="{{datalist.length>0}}" >
+                <view class="orderlist_item">
+                    <view class="orderlist_top item_cell_box">
+                        <view class="item_cell_flex">编号：{{item.id}}</view>
+                        <view class="tr orderlist_status" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{item.statusstr}}</view>
+                    </view>
+                    <view catchtap="orderinfo" class="orderlist_mid" data-url="{{item.url}}">
+                        <view class="zan-card orderlist_mid_item" s-for="{{item.list}}" s-for-item="in">
+                            <view class="zan-card__thumb">
+                                <image class="zan-card__img" mode="aspectFit" src="{{in.thumb}}"></image>
+                            </view>
+                            <view class="zan-card__detail">
+                                <view class="zan-card__detail-row">
+                                    <view class="zan-card__right-col">¥ {{in.money}}</view>
+                                    <view class="zan-card__left-col zan-ellipsis--l2 orderlist_goods_title">
+						             	{{in.title}}
+						          	</view>
+                                </view>
+                                <view class="zan-card__detail-row zan-c-gray-darker">
+                                    <view class="zan-card__right-col">x{{in.num}}</view>
+                                    <view class="zan-card__left-col orderlist_rule">
+						            	{{in.rulename}}
+						          	</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderlist_bot">
+                        <view class="bot_info">
+							共计<text class="bot_info_num">{{item.num}}</text>件商品
+							合计:￥ <text class="bot_info_num">{{item.fee}}</text>
+							{{item.express>0?'(含运费￥'+item.express+')':''}}
+						</view>
+                        <view class="bot_btn_list " s-if="{{item.status==0&&item.paytype==0||item.status==2||sets.kefutype>0&&item.status<=3||item.status>=2&&item.taketype==1&&item.paytype==0}}">
+                            <button bindtap="{{sets.kefutype==1?'callphone':sets.kefutype==3?'weburl':sets.kefutype==4?'showkefuimg':''}}" class="bot_btn click_button" data-img="{{sets.kefuimg}}" data-tel="{{sets.kefutel}}" data-url="{{sets.kefuurl}}" hoverClass="none" openType="{{sets.kefutype==2?'contact':''}}" sessionFrom="orderkefu" s-if="{{sets.kefutype>0&&item.status<=3}}">
+								联系客服
+							</button>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="cancel" s-if="{{item.status==0&&item.paytype==0}}">取消订单</view>
+                            <view bindtap="dealorder" class="bot_btn bot_btn_pay" data-id="{{item.orderid}}" data-type="pay" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}!important;border:1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}}!important;" s-if="{{item.status==0&&item.paytype==0}}">付款</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="express" s-if="{{item.status>=2&&item.taketype==1&&item.paytype==0}}">查看物流</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="com" s-if="{{item.status==2}}">确认完成</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            </block>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+    <view class="zan-popup zan-popup--right {{showRightPopup?'zan-popup--show':''}}">
+        <view class="zan-btns">
+            <button bindtap="toggleRightPopup" class="zan-btn zan-btn--disabled">关闭</button>
+        </view>
+        <view class="express_list">
+            <view class="zan-cell zan-cell">
+                <view class="zan-cell__bd">
+                    <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:expressdata}}"></template>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

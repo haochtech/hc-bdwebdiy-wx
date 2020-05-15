@@ -1,0 +1,386 @@
+<template name="bdParse11">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse12" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse12" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse12" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse12" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse12" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse10">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse11" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse11" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse11" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse11" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse11" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse9">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse10" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse10" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse10" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse10" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse10" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse8">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse9" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse9" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse9" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse9" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse9" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse7">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse8" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse8" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse8" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse8" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse8" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse6">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse7" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse7" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse7" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse7" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse7" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse5">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse6" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse6" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse6" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse6" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse6" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse4">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse5" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse5" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse5" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse5" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse5" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse3">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse4" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse4" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse4" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse4" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse4" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse2">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse3" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse3" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse3" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse3" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse3" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse1">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse2" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse2" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse2" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse2" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse2" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse0">
+    <block s-if="{{item.node=='element'}}">
+        <button size="mini" type="default" s-if="{{item.tag=='button'}}">
+            <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </button>
+        <view class="{{item.classStr}} bdParse-li" style="{{item.styleStr}}" wx:elif="{{item.tag=='li'}}">
+            <view class="{{item.classStr}} bdParse-li-inner">
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <view class="{{item.classStr}} bdParse-li-circle"></view>
+                </view>
+                <view class="{{item.classStr}} bdParse-li-text">
+                    <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+                </view>
+            </view>
+        </view>
+        <template is="bdParseVideo" data="{{item:item}}" wx:elif="{{item.tag=='video'}}"></template>
+        <template is="bdParseImg" data="{{item:item}}" wx:elif="{{item.tag=='img'}}"></template>
+        <view bindtap="bdParseTagATap" class="bdParse-inline {{item.classStr}} bdParse-{{item.tag}}" data-src="{{item.attr.href}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='a'}}">
+            <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tag=='table'}}">
+            <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <template is="bdParseBr" data wx:elif="{{item.tag=='br'}}"></template>
+        <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}" wx:elif="{{item.tagType=='block'}}">
+            <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+        <view class="{{item.classStr}} bdParse-{{item.tag}} bdParse-{{item.tagType}}" style="{{item.styleStr}}" s-else>
+            <template is="bdParse1" data="{{item:item}}" s-for="{{item.nodes}}"></template>
+        </view>
+    </block>
+    <template is="WxEmojiView" data="{{item:item}}" wx:elif="{{item.node=='text'}}"></template>
+</template>
+<template name="bdParse">
+    <template is="bdParse0" data="{{item:item}}" s-for="{{bdParseData}}"></template>
+</template>
+<template name="bdParseBr">
+    <text>
+</text>
+</template>
+<template name="WxEmojiView">
+    <view class="WxEmojiView bdParse-inline" style="{{item.styleStr}}">
+        <block s-for="{{item.textArray}}">
+            <block s-if="{{item.node=='text'}}">{{item.text}}</block>
+            <image class="wxEmoji" src="{{item.baseSrc}}{{item.text}}" wx:elif="{{item.node=='element'}}"></image>
+        </block>
+    </view>
+</template>
+<template name="bdParseImg">
+    <image bindload="bdParseImgLoad" bindtap="bdParseImgTap" class="{{item.classStr}} bdParse-{{item.tag}}" data-from="{{item.from}}" data-idx="{{item.imgIndex}}" data-src="{{item.attr.src}}" mode="widthFix" src="{{item.attr.src}}" style="width:{{item.width}}px;"></image>
+</template>
+<template name="bdParseVideo">
+    <view class="{{item.classStr}} bdParse-{{item.tag}}" style="{{item.styleStr}}">
+        <video class="{{item.classStr}} bdParse-{{item.tag}}-video" src="{{item.attr.src}}"></video>
+    </view>
+</template>

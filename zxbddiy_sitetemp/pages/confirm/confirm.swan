@@ -1,0 +1,151 @@
+<import src="../../resource/zan-ui/field/index.swan"></import>
+<view s-if="{{buyarr}}">
+    <form bindsubmit="payit" reportSubmit="true">
+        <view class="page">
+            <view class="address_info item_cell_box" s-if="{{taketype==1}}">
+                <view class="address_location">
+                    <view class="zan-icon zan-icon-location"></view>
+                </view>
+                <view bindtap="navigateto" class="address_main_info item_cell_flex" data-url="/zxbddiy_sitetemp/pages/user/address?from=1" s-if="{{address}}">
+                    <view class="address_receiver">
+                        <text class="address_name">{{address.name}}  </text>
+                        <text class="address_mobile">{{address.tel}}</text>
+                    </view>
+                    <view class="address_detail">
+	            	{{address.region}} {{address.street}}
+	            </view>
+                </view>
+                <view bindtap="navigateto" class="item_cell_flex address_select" data-url="/zxbddiy_sitetemp/pages/user/address?from=1" s-if="{{!address}}">选择地址</view>
+                <view class="address_arrow icon_r"></view>
+            </view>
+            <view class="good_list">
+                <view class="goods_info" s-for="{{buyarr.list}}">
+                    <view class="item_cell_box">
+                        <view class="goods_info_img">
+                            <image mode="widthFix" src="{{item.thumb}}"></image>
+                        </view>
+                        <view class="goods_detail">
+                            <view class="goods_name">{{item.title}}</view>
+                            <view class="goods_spec">
+                                <view s-if="{{item.rulename}}">选择: {{item.rulename}}</view>
+                                <view>数量: {{item.num}}</view>
+                                <view>单价: ￥{{item.price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="taketype" s-if="{{buyarr.iscanexpress==1||buyarr.iscanself==1}}">
+                <view class="taketype_title">发货方式</view>
+                <view class="taketype_box">
+                    <view bindtap="changeTakeType" class="item_cell_box taketype_item" data-type="1" s-if="{{buyarr.iscanexpress==1}}">
+                        <view class="item_cell_flex">快递配送</view>
+                        <view class="zan-icon zan-icon-success" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{taketype==1}}"></view>
+                    </view>
+                    <view bindtap="changeTakeType" class="item_cell_box taketype_item" data-type="2" s-if="{{buyarr.iscanself==1}}">
+                        <view class="item_cell_flex">上店提取</view>
+                        <view class="zan-icon zan-icon-success" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{taketype==2}}"></view>
+                    </view>
+                </view>
+            </view>
+            <view class="shopinfo" s-if="{{taketype==2&&shopinfo}}">
+                <view>
+                    <text class="shopinfo_name">{{shopinfo.name}}</text>
+                    <text class="shopinfo_tel">{{shopinfo.tel}}</text>
+                </view>
+                <view class="shopinfo_address">
+				{{shopinfo.address}}
+			</view>
+            </view>
+            <view class="address_tel mt20" s-if="{{taketype==2}}">
+                <template is="zan-field" data="{{title:'联系电话',type:'input',inputType:'number',placeholder:'请输入手机号',componentId:'tel',value:tel}}"></template>
+            </view>
+            <view class="confirm_text mt20" s-if="{{form.length<=0}}">
+                <textarea bindinput="messchange" maxlength="200" placeholder="备注内容" placeholderStyle="color:#999;"></textarea>
+            </view>
+            <view class="confirm_form" s-if="{{form.length>0}}">
+                <form bindsubmit="formSubmit">
+                    <view class="page_form_item" s-for="{{form}}" s-for-item="v">
+                        <view class="app_form_item" s-if="{{v.type=='0'}}">
+                            <view class="" s-if="{{v.name}}">{{v.name}} <text class="must" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r">
+                                <input class="show_form_input" name="{{v.id}}" placeholder="{{v.pla}}" type="text" />
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='1'}}">
+                            <view class="" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r">
+                                <textarea class="show_form_text" name="{{v.id}}" placeholder="{{v.pla}}"></textarea>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='2'}}">
+                            <view class="show_form_l" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{v.id}}" end="2155-01-01" mode="date" name="{{v.id}}" start="0001-01-01" value="">
+							    {{v.value?v.value:v.pla?v.pla:'选择日期'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='3'}}">
+                            <view class="show_form_l" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{v.id}}" mode="time" name="{{v.id}}" value="">
+							    {{v.value?v.value:v.pla?v.pla:'选择时间'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='4'}}">
+                            <view class="show_form_l" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{v.id}}" mode="region" name="{{v.id}}" value="">
+							    {{v.value?v.value[0]+'，'+v.value[1]+'，'+v.value[2]:v.pla?v.pla:'选择城市'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='5'}}">
+                            <view class="" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r">
+                                <radio-group bindchange="bindformChange" class="radio-group item_cell_box form_radio_box" data-i="{{v.id}}" name="{{v.id}}">
+                                    <label class="radio item_cell_box alenter alenter_radio" s-for="{{v.sitem}}" s-for-item="vv">
+                                        <radio class="radio_item radio_hide" value="{{vv}}"></radio>
+                                        <view class="zan-icon {{vv==v.value?'zan-icon-checked radio_checked':'zan-icon-check radio_unchecked'}} radio_checkitem " style="color: {{vv==v.value?bar.maincolor?bar.maincolor:'#ed414a':''}}"></view>
+                                        <view class="show_form_inname">{{vv}} </view>
+                                    </label>
+                                </radio-group>
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='6'}}">
+                            <view class="" s-if="{{v.name}}">{{v.name}} <text class="must" s-if="{{v.ismust!=1}}">*</text>
+                            </view>
+                            <view class="show_form_r">
+                                <checkbox-group bindchange="bindformChange" class="item_cell_box form_radio_box" data-i="{{v.id}}" data-type="checkbox" name="{{v.id}}">
+                                    <label class="checkbox item_cell_box alenter alenter_radio" s-for="{{v.sitem}}" s-for-index="k" s-for-item="vv">
+                                        <checkbox class="radio_item radio_hide " value="{{vv}}"></checkbox>
+                                        <view class="zan-icon {{v.checkbox[k]?'zan-icon-checked radio_checked':'zan-icon-check radio_unchecked'}} radio_checkitem " style="color: {{v.checkbox[k]?bar.maincolor?bar.maincolor:'#ed414a':''}}"></view>
+                                        <view class="show_form_inname">{{vv}} </view>
+                                    </label>
+                                </checkbox-group>
+                            </view>
+                        </view>
+                    </view>
+                </form>
+            </view>
+        </view>
+        <view class="footer_box confirm_footer">
+            <view class="item_cell_box">
+                <view class=" footer_info item_cell_flex">
+				合计：<text class="footer_total_icon" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">￥</text>
+                    <text class="footer_total" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">{{buyarr.total}}</text>
+                    <text class="express_money" s-if="{{buyarr.taketype==1}}">{{buyarr.totalexpress>0?'(含运费￥'+buyarr.totalexpress+')':''}} </text>
+                </view>
+                <button class="footer_confirm click_btn" formType="submit" style="background-color:{{bar.maincolor?bar.maincolor:'#ed414a'}}!important">继续支付</button>
+            </view>
+        </view>
+    </form>
+</view>

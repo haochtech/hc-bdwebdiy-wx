@@ -1,0 +1,76 @@
+<view class="page" s-if="{{inited}}">
+    <view class="add_top item_cell_box">
+        <view bindtap="showadd" class="add_top_item">
+            <text>手动添加</text>
+        </view>
+        <view class="add_top_item">
+            <text bindtap="wxadd" class="add_wx">百度导入</text>
+        </view>
+    </view>
+    <view class="list_box">
+        <view class="list_item" s-for="{{datalist}}">
+            <view class="list_item_add item_cell_box">
+                <view class="item_cell_flex">
+                    <view>{{item.params.name}} {{item.params.tel}}</view>
+                    <view>{{item.params.region}} {{item.params.street}}</view>
+                </view>
+                <view bindtap="useadd" class="add_btn" data-id="{{item.id}}" s-if="{{from==1}}">使用此地址</view>
+            </view>
+            <view class="list_item_bot item_cell_box" style="color: #999;">
+                <view bindtap="toact" class="bot_item" data-id="{{item.id}}">
+                    <icon color="{{item.isact==1?'#ff5f27':'#dddddd'}}" size="15" type="success"></icon>
+                </view>
+                <view class="bot_item item_cell_flex" s-if="{{item.isact==1}}">
+                    已设为默认
+                </view>
+                <view bindtap="toact" class="bot_item item_cell_flex" data-id="{{item.id}}" s-if="{{item.isact==0}}">
+                    设为默认
+                </view>
+                <view bindtap="edit" class="bot_item add_btn" data-id="{{item.id}}">编辑</view>
+                <view bindtap="delete" class="bot_item add_btn" data-id="{{item.id}}">删除</view>
+            </view>
+        </view>
+    </view>
+    <view class="pagelist_nodata" s-if="{{datalist.length<=0}}">没有数据</view>
+    <view class="pagelist_tobot " s-if="{{page.nodataf&&datalist.length>0}}">到底了</view>
+    <view class="pagelist_wait " s-if="{{page.waitf}}">
+        <image src="/images/loading.gif"></image>
+    </view>
+    <view class="showselect_box" s-if="{{showadd}}">
+        <view bindtap="showadd" catchtouchmove="noscroll" class="mask"></view>
+        <view class="showselect_body">
+            <view class="addform_item item_cell_box">
+                <view class="addform_item_name">姓名</view>
+                <view class="addform_item_input item_cell_flex">
+                    <input bindinput="bindinput" data-type="1" maxlength="20" type="text" value="{{name}}" />
+                </view>
+            </view>
+            <view class="addform_item item_cell_box">
+                <view class="addform_item_name">电话</view>
+                <view class="addform_item_input item_cell_flex">
+                    <input bindinput="bindinput" data-type="2" maxlength="20" type="tel" value="{{tel}}" />
+                </view>
+            </view>
+            <view class="addform_item item_cell_box">
+                <view class="addform_item_name">地区</view>
+                <view class="addform_item_input item_cell_flex" style="color: #666;">
+                    <picker bindchange="bindRegionChange" mode="region" value="{{region}}">
+                        <view s-if="{{!region[0]}}">请点击选择地址</view>
+                        <view class="picker" s-else>
+                            {{region[0]}}，{{region[1]}}，{{region[2]}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="addform_item item_cell_box">
+                <view class="addform_item_name">街道</view>
+                <view class="addform_item_input item_cell_flex">
+                    <textarea bindinput="bindinput" data-type="3" maxlength="200" name="textarea" placeholder="输入街道地址" value="{{street}}"></textarea>
+                </view>
+            </view>
+            <view bindtap="sub" class="sub">提交</view>
+            <icon bindtap="showadd" class="hideitem" color="#ffffff" size="40" type="cancel"></icon>
+        </view>
+    </view>
+</view>
+<!-- <include src="/zofui_storyer/pages/common/bglogo.swan"></include> -->

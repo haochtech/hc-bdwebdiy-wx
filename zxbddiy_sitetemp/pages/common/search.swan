@@ -1,0 +1,25 @@
+<view class="zan-popup zan-popup--right {{showRightPopup?'zan-popup--show':''}}">
+    <view class="soearch_box item_cell_box">
+        <view class="soearch_box_in item_cell_box item_cell_flex">
+            <view class="zan-icon zan-icon-search"></view>
+            <input
+            bindconfirm="tosearch"
+            bindinput="searchinput"
+            class="item_cell_flex soearch_box_input"
+            confirmType="search" focus="{{searchfocus}}" maxlength="40" name="for" placeholder="输入商品名称" type="text" />
+        </view>
+        <view bindtap="tosearch" class="soearch_box_btn">搜索</view>
+    </view>
+    <view class="search_hist">
+        <view class="item_cell_box search_hist_title">
+            <view>历史搜索</view>
+            <view bindtap="clearhist" class="item_cell_flex tr">清除</view>
+        </view>
+        <view class="searchhist_box">
+            <view bindtap="tosearchhist" class="searchhist_item" data-item="{{item}}" s-for="{{searchhist}}">{{item}}</view>
+        </view>
+    </view>
+    <view class="zan-btns popup_close_btn">
+        <button bindtap="toggleRightPopup" class="zan-btn zan-btn--disabled">关闭</button>
+    </view>
+</view>

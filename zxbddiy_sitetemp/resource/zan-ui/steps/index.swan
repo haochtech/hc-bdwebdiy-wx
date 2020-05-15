@@ -1,0 +1,15 @@
+<template name="zan-steps">
+    <view class="zan-steps zan-steps--{{type=='vertical'?'vsteps':'steps'}} zan-steps--{{steps.length}} {{className}}">
+        <view class="zan-steps__step {{hasDesc?'zan-steps__step--db-title':''}} {{index==0?'zan-steps__step--first-child':''}} {{index==steps.length-1?'zan-steps__step--last-child':''}} {{step.done?'zan-steps__step--done':''}} {{step.current?'zan-steps__step--cur':''}}" style="{{step.type==0||!step.type?'background:#f6f6f6':''}}" s-for="{{steps}}" s-for-item="step" wx:key="unique">
+            <view bindtap="{{fn}}" class="zan-steps__title steps__title" data-key="{{step.key}}">{{step.text}}</view>
+            <view bindtap="{{fn}}" class="zan-steps__title zan-steps__title--desc" data-key="{{step.key}}" s-if="{{hasDesc&&step.desc}}">{{step.desc}}</view>
+            <view class="zan-steps__title" s-if="{{step.img}}">
+                <image bindtap="showimg" data-img="{{item}}" data-imgarr="{{step.img}}" src="{{item}}" style="width: 100rpx;height: 100rpx;margin:0 10rpx 10rpx 0rpx" s-for="{{step.img}}"></image>
+            </view>
+            <view class="zan-steps__icons">
+                <view class="zan-steps__circle"></view>
+            </view>
+            <view class="zan-steps__line"></view>
+        </view>
+    </view>
+</template>

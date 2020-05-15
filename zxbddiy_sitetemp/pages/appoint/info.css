@@ -1,0 +1,213 @@
+.appoint_thumb image {
+    display: block;
+}
+
+.appoint_name_in {
+    background: #fff;
+    padding: 10rpx 20rpx;
+}
+
+.appoint_desc_in {
+    font-size: 28rpx;
+    color: #6e6e6e;
+}
+
+.appoint_form {
+    padding: 10rpx;
+    margin-top: 11rpx;
+}
+
+.appoint_formitem {
+    background: #fff;
+    margin-bottom: 20rpx;
+    box-shadow: 0px 0px 3px rgba(51,51,51,0.3);
+    border-radius: 5rpx;
+}
+
+.appoint_itemtop {
+    padding: 10rpx 20rpx;
+    border-bottom: 1px solid #f3f4f9;
+    color: #666;
+}
+
+.appoint_itembot {
+    padding: 30rpx 20rpx;
+    overflow: hidden;
+}
+
+.appoint_itembot radio,.appoint_itembot checkbox {
+    display: none;
+}
+
+.appoint_itembot label {
+    border: 1px solid #eee;
+    padding: 10rpx 20rpx;
+    border-radius: 40rpx;
+    margin: 0 10rpx 20rpx 0;
+    display: inline-block;
+}
+
+.checked {
+    background: #98499c;
+    color: #fff;
+    border: 0;
+}
+
+.appoint_itembot input {
+    border-bottom: 1px solid #eee;
+    padding-top: 10rpx;
+}
+
+.appoint_itembot textarea {
+    height: 150rpx;
+    border-bottom: 1px solid #eee;
+}
+
+.appoint_pla {
+    color: #666;
+}
+
+.appoint_date,.appoint_time {
+    width: 50%;
+    text-align: center;
+}
+
+.appoint_date {
+    border-right: 1px solid #ddd;
+}
+
+.appoint_foot {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    background: #98499c;
+    color: #fff;
+    text-align: center;
+}
+
+.appoint_foot button {
+    background: #98499c;
+    color: #fff!important;
+    padding: 30rpx 0!important;
+    border: 0!important;
+    width: 100%!important;
+    height: 100%!important;
+    display: block!important;
+    text-align: center!important;
+}
+
+.appoint_foot text {
+    font-size: 26rpx;
+}
+
+.tel_btn {
+    font-size: 30rpx!important;
+    color: #333!important;
+}
+
+.appoint_itemtel button {
+    width: 700rpx!important;
+    display: block!important;
+    padding: 10rpx 0!important;
+}
+
+.appoint_content {
+    padding: 10rpx;
+    background: #fff;
+    margin-top: 10rpx;
+}
+
+.appoint_content image {
+    width: 100%;
+}
+
+.time_box {
+    position: fixed;
+    left: 75rpx;
+    top: 100rpx;
+    width: 600rpx;
+    height: 900rpx;
+    border: 1px solid #eee;
+}
+
+.time_box_in {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    padding: 10rpx;
+    border-radius: 10rpx;
+    height: 900rpx;
+    overflow-x: hidden;
+}
+
+.time_box_itema {
+    height: 900rpx;
+}
+
+.time_item {
+    display: inline-block;
+    padding: 10rpx 0;
+    width: 200rpx;
+    margin: 20rpx 40rpx;
+    background: #b9b9b9;
+    border-radius: 5rpx;
+    color: #333;
+    text-align: center;
+}
+
+.time_itemact {
+    background: #ed414a;
+    color: #fff;
+}
+
+.time_box_inb {
+    padding: 0;
+    border-radius: 5rpx;
+}
+
+.time_box_itemb {
+    max-height: 900rpx;
+}
+
+.timetypeb_l_item {
+    padding: 30rpx 5rpx;
+}
+
+.timetypeb_l {
+    background: #eee;
+    width: 200rpx;
+    text-align: center;
+    height: 900rpx;
+}
+
+.timetypeb_r {
+    max-height: 900rpx;
+    text-align: center;
+    padding: 20rpx 0;
+}
+
+.itemb_item_in {
+    text-align: center;
+    padding: 20rpx;
+    background: #fff;
+    border: 1rpx solid #eee;
+    margin: 10rpx auto;
+    border-radius: 5rpx;
+    width: 200rpx;
+}
+
+.timetypeb_l_act {
+    background: #fff;
+    color: #ed414a;
+}
+
+.timetypeb_r_act {
+    background: #ed414a;
+    color: #fff;
+}
+
+.disabled {
+    background: #eee;
+    color: #999;
+}

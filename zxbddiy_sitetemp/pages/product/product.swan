@@ -1,0 +1,10 @@
+<view class="page" s-if="{{article}}">
+    <block s-if="{{article.content||article.parsevurl}}">
+        <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+        <view class="art_body">
+            <video controls autoplay="{{false}}" objectFit="contain" src="{{article.parsevurl}}" style="width: 100%;" s-if="{{article.parsevurl}}"></video>
+            <template is="bdParse" data="{{ {bdParseData:article.content.nodes} }}"></template>
+        </view>
+    </block>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

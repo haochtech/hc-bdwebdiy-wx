@@ -1,0 +1,205 @@
+.page {
+    padding-bottom: 150rpx;
+}
+
+.address_info {
+    background: #fff;
+    padding: 10rpx;
+    margin-bottom: 10rpx;
+    align-items: center;
+    position: relative;
+}
+
+.address_location .zan-icon {
+    font-size: 50rpx;
+    padding: 0 20rpx;
+    color: #999;
+}
+
+.address_arrow {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.address_name {
+    font-size: 30rpx;
+    font-weight: 700;
+}
+
+.address_mobile,.address_detail {
+    color: #333;
+    font-size: 28rpx;
+}
+
+.address_info::after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    left: 0;
+    width: 750rpx;
+    height: 4rpx;
+    background-position: 0 0;
+    background-size: 750rpx 4rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu4AAAAEBAMAAAAjc6c0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAkUExURf///+AiQg2n1pLY7Tm43uP1+/j19+xyhvnR2OVFYPOqt+IxToDxBmUAAACISURBVDjLY1CCAQcGJJApiA6kkKWZlTBAALJ8IYb2acjSKRi6lZGlOTZiaF+ALG+EoV0VWZodQ7cksjSrE4Z2A2T5bgztEvi9rpKA3+sFyNIhUE0McN3IsmwTqe1zZLexkexzCiN9AjafEx/pDfi97obf6+JYI51hNLkPRHKHh/tocqdrclcCAPelbfmxPQpjAAAAAElFTkSuQmCCCg==);
+}
+
+.goods_info {
+    background: #fff;
+    padding: 10rpx;
+    border-bottom: 1px solid #eee;
+}
+
+.goods_info_img {
+    width: 180rpx;
+    height: 140rpx;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+}
+
+.goods_info_img image {
+    width: 180rpx;
+    display: block;
+    border: 1px solid #eee;
+}
+
+.goods_name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.goods_detail {
+    padding-left: 10rpx;
+    font-size: 28rpx;
+}
+
+.confirm_footer {
+    padding-right: 10rpx;
+}
+
+.footer_confirm {
+    height: 105rpx!important;
+    line-height: 105rpx!important;
+    background: #ed414a!important;
+    text-align: center!important;
+    color: #fff!important;
+    width: 250rpx!important;
+    border-radius: 0!important;
+    font-size: 32rpx!important;
+}
+
+.footer_info {
+    line-height: 100rpx;
+    color: #666;
+    text-align: right;
+    font-size: 28rpx;
+    padding-right: 10rpx;
+}
+
+.goods_spec view {
+    color: #555;
+    line-height: 35rpx;
+}
+
+.footer_total_icon,.footer_total {
+    color: #ed414a;
+}
+
+.footer_total {
+    font-size: 40rpx;
+}
+
+.express_money {
+    font-size: 28rpx;
+}
+
+.address_select {
+    padding: 30rpx;
+    color: #666;
+}
+
+.taketype {
+    background: #fff;
+    padding: 20rpx;
+    margin-top: 20rpx;
+}
+
+.taketype_title {
+    font-size: 32rpx;
+    color: #999;
+}
+
+.taketype_item {
+    padding: 20rpx 0;
+    color: #666;
+    font-size: 29rpx;
+}
+
+.taketype_item {
+    border-bottom: 1px solid #ddd;
+}
+
+.taketype_item:last-child {
+    border-bottom: 0;
+}
+
+.taketype_item .zan-icon {
+    font-size: 35rpx;
+    color: #ed414a;
+}
+
+.shopinfo {
+    background: #fff;
+    padding: 20rpx;
+    margin-top: 10rpx;
+}
+
+.shopinfo_name {
+    font-weight: 700;
+    padding-right: 30rpx;
+}
+
+.shopinfo_tel {
+    font-weight: 400;
+}
+
+.shopinfo_address {
+    color: #666;
+    font-size: 28rpx;
+}
+
+.address_tel {
+    background: #fff;
+    margin-bottom: 20rpx;
+}
+
+.address_tel .zan-field {
+    padding: 20rpx;
+}
+
+.confirm_text {
+    background: #fff;
+    padding: 20rpx;
+}
+
+.confirm_text textarea {
+    width: auto;
+    height: 100rpx;
+    border: 1px solid #eee;
+    margin: 0 auto;
+    padding: 10rpx;
+    font-size: 28rpx;
+}
+
+.confirm_form {
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.must {
+    color: #ed414a;
+}

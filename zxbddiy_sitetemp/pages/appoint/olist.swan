@@ -1,0 +1,50 @@
+<import src="../../resource/zan-ui/tab/index.swan"></import>
+<view class="page">
+    <view class="orderlist_top">
+        <template is="zan-tab" data="{{tab:tab,componentId:'tab'}}"></template>
+    </view>
+    <view class="goodlist_goodbox">
+        <view class="pagelist">
+            <block s-for="{{datalist}}">
+            <view class="orderlist" s-if="{{datalist.length>0}}" >
+                <view class="orderlist_item">
+                    <view class="orderlist_top item_cell_box">
+                        <view class="item_cell_flex">预约编号：{{item.id}}</view>
+                        <view class="tr orderlist_status" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{item.statusstr}}</view>
+                    </view>
+                    <view catchtap="orderinfo" class="orderlist_mid" data-url="{{item.url}}">
+                        <view class="zan-card orderlist_mid_item">
+                            <view class="zan-card__thumb">
+                                <image class="zan-card__img" mode="aspectFit" src="{{item.app.thumb}}"></image>
+                            </view>
+                            <view class="zan-card__detail">
+                                <view class="zan-card__detail-row">
+						          	{{item.app.name}}
+						        </view>
+                                <view class="zan-card__detail-row zan-c-gray-darker">
+						          	{{item.app.desc}}
+						        </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderlist_bot">
+                        <view class="bot_btn_list ">
+                            <button bindtap="{{sets.apkefutype==1?'callphone':sets.apkefutype==3?'weburl':sets.apkefutype==4?'showkefuimg':''}}" class="bot_btn click_button" data-img="{{sets.apkefuimg}}" data-tel="{{sets.apkefutel}}" data-url="{{sets.apkefuurl}}" hoverClass="none" openType="{{sets.apkefutype==2?'contact':''}}" sessionFrom="apporderkefu" s-if="{{sets.apkefutype>0}}">
+								联系客服
+							</button>
+                            <view bindtap="dealorder" class="bot_btn bot_btn_pay" data-id="{{item.orderid}}" data-type="pay" s-if="{{item.status==0&&item.fee>0}}">付款</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="com" s-if="{{item.status==2}}">完成</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            </block>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

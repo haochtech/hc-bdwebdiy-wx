@@ -1,0 +1,115 @@
+<view s-if="{{appoint}}">
+    <view class="page">
+        <swiper autoplay="true" duration="200" indicatorDots="{{appoint.pic.length>1}}" interval="3000" style="width: 100%;height:{{swiperheight}}px;" s-if="{{appoint.pic.length>0}}">
+            <swiper-item s-for="{{appoint.pic}}" s-for-item="img">
+                <image bindload="imageLoad" class="slide-image" lazyLoad="true" mode="widthFix" src="{{img}}" style="width: 100%;height:{{swiperheight}}px;"></image>
+            </swiper-item>
+        </swiper>
+        <view class="appoint_name_in" s-if="{{appoint.name||appoint.desc}}">
+            <view class="appoint_title" s-if="{{appoint.name}}">{{appoint.name}}</view>
+            <view class="appoint_desc_in" s-if="{{appoint.desc}}">{{appoint.desc}}</view>
+        </view>
+        <form bindsubmit="subit" reportSubmit="true" s-if="{{!showtimebox}}">
+            <view class="appoint_form mt05">
+                <view class="appoint_formitem" s-if="{{appoint.istel==1}}">
+                    <view class="appoint_itemtop">
+						手机号码
+					</view>
+                    <view class="appoint_itembot appoint_itemtel">
+                        <button bindgetphonenumber="getPhoneNumber" class="click_button tel_btn" openType="getPhoneNumber">{{tel?tel:'填写手机号码'}}</button>
+                    </view>
+                </view>
+                <view bindtap="selecttime" class="appoint_formitem" s-if="{{appoint.istime==1}}">
+                    <view class="appoint_itemtop">
+						预约时间
+					</view>
+                    <view class="appoint_itembot appoint_itemtel">
+						{{appoint.timedata.timetype==0?actttime?actttime:'选择预约时间':actrs?actleft+' '+actrs+'-'+actre:'选择预约时间'}}
+					</view>
+                </view>
+                <view class="appoint_formitem" s-for="{{appoint.form}}">
+                    <view class="appoint_itemtop">
+						{{item.name}}
+					</view>
+                    <view class="appoint_itembot" s-if="{{item.type=='single'}}">
+                        <radio-group bindchange="bindformChange" class="radio-group" data-i="{{item.id}}" name="{{item.id}}" value="{{item.value}}">
+                            <label class="radio {{item.value==in?'checked':''}}" style="background-color: {{item.value==in?bar.maincolor?bar.maincolor:'#98499c':''}}" s-for="{{item.sitem}}" s-for-item="in">
+                                <radio checked="" value="{{in}}"></radio>{{in}}
+						  	</label>
+                        </radio-group>
+                    </view>
+                    <view class="appoint_itembot" s-if="{{item.type=='multi'}}">
+                        <checkbox-group bindchange="bindformChange" data-i="{{item.id}}" data-type="multi" name="{{item.id}}" value="{{item.value}}">
+                            <label class="checkbox {{item.ischecked[idx]?'checked':''}}" style="background-color: {{item.ischecked[idx]?bar.maincolor?bar.maincolor:'#98499c':''}}" s-for="{{item.sitem}}" s-for-index="idx" s-for-item="in">
+                                <checkbox checked="" value="{{in}}"></checkbox>{{in}}
+						  	</label>
+                        </checkbox-group>
+                    </view>
+                    <view class="appoint_itembot" s-if="{{item.type=='input'}}">
+                        <input bindchange="" name="{{item.id}}" placeholder="{{item.pla}}" placeholderStyle="color:#999" type="text" value="{{item.value}}" />
+                    </view>
+                    <view class="appoint_itembot" s-if="{{item.type=='text'}}">
+                        <textarea name="{{item.id}}" placeholder="{{item.pla}}" placeholderStyle="color:#999;" value="{{item.value}}"></textarea>
+                    </view>
+                    <view class="appoint_itembot" s-if="{{item.type=='city'}}">
+                        <view class="appoint_pla">
+                            <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" mode="region" name="{{item.id}}" value="">
+							    {{item.value?item.value[0]+'，'+item.value[1]+'，'+item.value[2]:item.pla?item.pla:'选择城市'}}
+							</picker>
+                        </view>
+                    </view>
+                    <view class="appoint_itembot item_cell_box" s-if="{{item.type=='time'}}">
+                        <view class="appoint_pla appoint_date">
+                            <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" data-type="date" end="2155-01-01" mode="date" name="{{item.id}}" start="0001-01-01" value="">
+							    {{item.value.date?item.value.date:'选择日期'}}
+							</picker>
+                        </view>
+                        <view class="appoint_pla appoint_time">
+                            <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" data-type="time" mode="time" name="{{item.id}}" value="">
+							    {{item.value.time?item.value.time:'选择时间'}}
+							</picker>
+                        </view>
+                    </view>
+                    <view class="appoint_itembot" s-if="{{item.type=='img'}}">
+                        <view class="appoint_pla">
+                            <view class="app_form_addimg" s-for="{{item.upimgar}}" s-for-item="in">
+                                <image bindtap="deleteImg" data-id="{{item.id}}" data-iid="{{in.id}}" src="{{in.url}}"></image>
+                            </view>
+                            <view bindtap="uploadimg" class="app_form_addimg" data-id="{{item.id}}" data-item="{{item}}">＋</view>
+                            <input maxlength="-1" name="{{item.id}}" style="display: none;" type="text" value="{{item.upimgarstr}}" />
+                        </view>
+                    </view>
+                </view>
+                <block s-if="{{appoint.content}}">
+                    <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+                    <view class="appoint_content">
+                          <!-- <template is="bdParse" data="{{ {bdParseData:article.content.nodes} }}"></template> -->
+                        <template is="bdParse" data="{{ {bdParseData:appoint.contenta.nodes} }}"></template>
+                    </view>
+                </block>
+            </view>
+            <view class="footer_in appoint_foot" style="background-color: {{bar.maincolor?bar.maincolor:'#98499c'}}">
+                <button class="click_button" formType="submit">提交 <text> {{appoint.price>0&&appoint.ispay==1?'(¥'+appoint.price*100/100+')':''}} </text>
+                </button>
+            </view>
+        </form>
+        <view class="time_box" s-if="{{appoint.istime==1&&showtimebox}}">
+            <view catchtouchmove="default" class="mask"></view>
+            <view catchtouchmove="default" class="time_box_in {{appoint.timedata.timetype==1?'time_box_inb':''}}">
+                <scroll-view scrollY class="time_box_itema" s-if="{{appoint.timedata.timetype==0}}">
+                    <view bindtap="{{item.status==0?'actttime':''}}" class="time_item {{item.d==actttime?'time_itemact':''}} {{item.status==1?'disabled':''}}" data-time="{{item.d}}" style="background-color:{{item.d==actttime?bar.maincolor?bar.maincolor:'#ed414a':''}};" s-for="{{appoint.structtime}}">{{item.d}}</view>
+                </scroll-view>
+                <view class="time_box_itemb item_cell_box" s-if="{{appoint.timedata.timetype==1}}">
+                    <scroll-view scrollY class="timetypeb_l">
+                        <view bindtap="changeleft" class="timetypeb_l_item {{actleft==item.d||!actleft&&index==0?'timetypeb_l_act':''}}" data-d="{{item.d}}" style="color: {{actleft==item.d||!actleft&&index==0?bar.maincolor?bar.maincolor:'#ed414a':''}}" s-for="{{appoint.structtime}}">{{item.d}}</view>
+                    </scroll-view>
+                    <scroll-view scrollY class="timetypeb_r item_cell_flex">
+                        <view class="itemb_item" s-if="{{actleft==item.d||!actleft&&index==0}}" s-for="{{appoint.structtime}}">
+                            <view bindtap="{{in.status==0?'changeright':''}}" class="itemb_item_in {{actrs==in.start&&actre==in.end?'timetypeb_r_act':''}} {{in.status==1?'disabled':''}}" data-d="{{item.d}}" data-end="{{in.end}}" data-start="{{in.start}}" style="background-color: {{actrs==in.start&&actre==in.end?bar.maincolor?bar.maincolor:'#ed414a':''}}" s-for="{{item.t}}" s-for-item="in">{{in.start}}-{{in.end}}</view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

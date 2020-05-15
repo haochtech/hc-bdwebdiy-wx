@@ -1,0 +1,13 @@
+<view class="footer_box fixbgimg" style="background-image: url('{{bar.bgimg}}');background-color:{{bar.bgcolor}};border-top: 1px solid {{bar.bjcolor?bar.bjcolor:'#eeeeee'}};" s-if="{{bar.data.length>0&&bar.bartype!=1}}">
+    <view class="footer_in" style="padding-top:{{bar.paddingtop}}px;padding-bottom:{{bar.paddingbot}}px;">
+        <view class="item_cell_box">
+            <view class="footer_item" style="width:{{100/bar.num}}%" s-for="{{bar.data}}">
+                <button bindtap="{{item.type=='tel'?'callphone':item.type=='map'?'location':item.type=='other'?'otherapp':item.type=='url'||!item.type?'redirectto':item.type=='weburl'?'toweburl':item.type=='images'?'showimages':item.type?item.type:''}}" class="footer_button click_button" data-addname="{{item.addname}}" data-address="{{item.address}}" data-appid="{{item.appid}}" data-appurl="{{item.appurl}}" data-img="{{item.imagesdata}}" data-isfoot="1" data-lat="{{item.lat}}" data-lng="{{item.lng}}" data-pageid="{{item.pageid}}" data-tel="{{item.tel}}" data-text="{{item.text}}" data-url="{{item.url}}" data-weburl="{{item.weburl}}" hoverClass="none" openType="{{item.type=='kefu'?'contact':item.type=='share'?'share':''}}" sessionFrom="{{item.sfrom}}" style="background:{{bar.bgcolor}}">
+                    <image class="footer_item_img" src="{{item.actimg}}" style="width:{{bar.iconwidth}}px;height:{{bar.iconwidth}}px;padding-bottom:{{bar.padfont}}px;" s-if="{{pageurl&&pageurl==item.url}}"></image>
+                    <image class="footer_item_img" src="{{item.img}}" style="width:{{bar.iconwidth}}px;height:{{bar.iconwidth}}px;padding-bottom:{{bar.padfont}}px;" s-else></image>
+                    <view class="footer_item_name" style="color:{{pageurl&&pageurl==item.url?bar.actcolor:bar.color}};font-size:{{bar.fontsize}}px">{{item.name}}</view>
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

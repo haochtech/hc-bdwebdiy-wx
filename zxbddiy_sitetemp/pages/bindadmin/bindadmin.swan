@@ -1,0 +1,8 @@
+<view class="page">
+    <view class="admin_box">
+        <image class="admin_headimg" src="{{wxuser.avatarUrl}}"></image>
+        <view class="admin_nickname">{{wxuser.nickName}}</view>
+        <view catchtap="{{status==3?'bind':''}}" class="my_btn admin_btn  {{status==3?'':'my_btn_disabled'}}">{{mess}}</view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/auth.swan"></include>

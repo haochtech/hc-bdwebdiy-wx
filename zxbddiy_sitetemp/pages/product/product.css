@@ -1,0 +1,39 @@
+page {
+    background: #fff;
+}
+
+.page {
+    padding: 20rpx;
+}
+
+.art_title {
+    color: #333;
+    font-weight: 400;
+    font-size: 45rpx;
+    margin-bottom: 20rpx;
+}
+
+.art_time {
+    color: #8c8c8c;
+    font-size: 33rpx;
+    margin-bottom: 20rpx;
+}
+
+.art_time_auth {
+    color: #607fa6;
+    text-decoration: none;
+}
+
+.art_body {
+    margin-bottom: 50rpx;
+}
+
+.art_data {
+    margin-bottom: 100rpx;
+    color: #8c8c8c;
+    font-size: 33rpx;
+}
+
+.art_body image {
+    width: 100%;
+}

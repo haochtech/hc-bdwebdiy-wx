@@ -1,0 +1,22 @@
+<view class="temp_ad item_cell_box mt10" s-if="{{adtype==1}}">
+    <image class="temp_ad_l" src="/images/ad.png"></image>
+    <view class="temp_ad1_r  item_cell_flex">
+        <view animation="{{animation}}" class="temp_ad_in">
+            <view class="temp_ad1_item" s-for="{{ad}}">
+	            {{item.title}}
+	        </view>
+        </view>
+    </view>
+</view>
+<view class="temp_ad item_cell_box mt10" s-if="{{adtype==0}}">
+    <image class="temp_ad_l" src="/images/ad.png"></image>
+    <view class="temp_ad1_r  item_cell_flex">
+        <swiper autoplay="true" circular="true" class="temp_ad2_item" duration="800" interval="4000" vertical="true" s-if="{{adtype==0}}">
+            <navigator openType="navigate" url="/pages/index/index?title={{item.url}}" s-for="{{ad}}">
+                <swiper-item>
+                    <view class="temp_ad2_itemin">{{item.title}}</view>
+                </swiper-item>
+            </navigator>
+        </swiper>
+    </view>
+</view>

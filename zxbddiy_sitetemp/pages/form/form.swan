@@ -1,0 +1,45 @@
+<view class="page">
+    <view class="form_pass_box " style="display: {{ischeck?'none':'block'}}" s-if="{{!ischeck}}">
+        <view class="tc mt40 form_item">
+            <input autoFocus bindinput="setPass" class="my_input" focus="false" placeholder="输入验证码" placeholderClass="custom-placeholder-class" placeholderStyle="custom-placeholder-style" type="text" value="" />
+        </view>
+        <view bindtap="look" class="my_btn mt40 tc" style="background-color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">查看数据</view>
+    </view>
+    <view class="pagelist mt10" s-if="{{!showinfo&&ischeck}}">
+        <view class="form_tab item_cell_box">
+            <view catchtap="changetype" class="form_tab_item {{page.pdata.type==1?'form_tab_act':''}}" data-type="1">未审核</view>
+            <view catchtap="changetype" class="form_tab_item item_cell_flex {{page.pdata.type==2?'form_tab_act':''}}" data-type="2">已审核</view>
+        </view>
+        <view class="index_task_item mt40" s-if="{{datalist.length>0}}" s-for="{{datalist}}">
+            <view catchtap="showform" class="item_cell_box form_list_item" data-id="{{item.id}}">
+                <view class="form_list_id">
+					ID:{{item.id}}
+				</view>
+                <view class="item_cell_flex form_list_time tr">
+					{{item.createtime}}
+				</view>
+                <view class="icon_r"></view>
+            </view>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+    <view class="sheet_box" s-if="{{showinfo}}">
+        <scroll-view class="sheet_box_in" scrollY="{{true}}">
+            <view class="item_cell_box sheet_box_item alcenter" s-for="{{actdata}}">
+                <view class="sheet_box_l">{{item.name}}</view>
+                <view class="sheet_box_r item_cell_flex" s-if="{{item.value.type&&item.value.type=='img'}}">
+                    <image bindtap="showimages" class="form_img" data-img="{{item.value.list}}" data-src="{{in}}" src="{{in}}" s-for="{{item.value.list}}" s-for-item="in"></image>
+                </view>
+                <view class="sheet_box_r item_cell_flex" s-else>{{item.value}}</view>
+            </view>
+        </scroll-view>
+        <view class="sheet_tot item_cell_box">
+            <view catchtap="readit" class="sheet_btn my_btn_disabled " data-id="{{actinfo.id}}" s-if="{{actinfo.isread==0}}">记为已审核</view>
+            <view catchtap="closesheet" class="sheet_btn item_cell_flex" style="background-color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">关闭</view>
+        </view>
+    </view>
+</view>

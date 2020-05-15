@@ -1,0 +1,94 @@
+<import src="../../resource/zan-ui/tab/index.swan"></import>
+<import src="../../resource/zan-ui/steps/index.swan"></import>
+<view class="page">
+    <view class="orderlist_top">
+        <template is="zan-tab" data="{{tab:tab,componentId:'tab'}}"></template>
+    </view>
+    <view class="goodlist_goodbox">
+        <view class="pagelist">
+            <view class="orderlist" s-if="{{datalist.length>0}}" s-for="{{datalist}}">
+                <view class="orderlist_item">
+                    <view class="orderlist_top item_cell_box">
+                        <view class="item_cell_flex">编号：{{item.id}}</view>
+                        <view class="tr orderlist_status" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{item.statusstr}}</view>
+                    </view>
+                    <view catchtap="orderinfo" class="orderlist_mid" data-url="{{item.url}}">
+                        <view class="zan-card orderlist_mid_item" s-for="{{item.list}}" s-for-item="in">
+                            <view class="zan-card__thumb">
+                                <image class="zan-card__img" mode="aspectFit" src="{{in.thumb}}"></image>
+                            </view>
+                            <view class="zan-card__detail">
+                                <view class="zan-card__detail-row">
+                                    <view class="zan-card__right-col">¥ {{in.money}}</view>
+                                    <view class="zan-card__left-col zan-ellipsis--l2 orderlist_goods_title">
+						             	{{in.title}}
+						          	</view>
+                                </view>
+                                <view class="zan-card__detail-row zan-c-gray-darker">
+                                    <view class="zan-card__right-col">x{{in.num}}</view>
+                                    <view class="zan-card__left-col orderlist_rule">
+						            	{{in.rulename}}
+						          	</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderlist_bot">
+                        <view class="bot_info">
+							共计<text class="bot_info_num">{{item.num}}</text>件商品
+							合计:￥ <text class="bot_info_num">{{item.fee}}</text>
+							{{item.express>0?'(含运费￥'+item.express+')':''}}
+						</view>
+                        <view class="bot_btn_list ">
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="com" s-if="{{item.status==0&&item.paytype==1||item.status==2&&item.paytype==0||item.status==1&&item.taketype==2}}">完成</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="refund" s-if="{{(item.status==1||item.status==2)&&item.paytype==0}}">退款</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="send" s-if="{{item.status==1&&item.paytype==0&&item.taketype==1}}">发货</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="express" s-if="{{item.status>=2&&item.taketype==1&&item.paytype==0}}">{{lawyer==1?'查看进度':'查看物流'}}</view>
+                            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="cancel" s-if="{{item.status==0}}">删除</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+    <view class="zan-popup zan-popup--right {{showRightPopup?'zan-popup--show':''}}">
+        <view class="zan-btns">
+            <button bindtap="toggleRightPopup" class="zan-btn zan-btn--disabled">关闭</button>
+        </view>
+        <view class="express_list">
+            <view class="zan-cell zan-cell">
+                <view class="zan-cell__bd">
+                    <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:expressdata}}"></template>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-dialog {{showexpress?'zan-dialog--show':''}}">
+        <view bindtap="toggleexpress" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container">
+            <view class="icon_box">
+                <view class="express_head">填写快递信息</view>
+                <view class="express_item item_cell_box ">
+                    <view class="express_l">快递名称</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <input bindinput="expressname" name="name" type="text" value="" />
+                    </view>
+                </view>
+                <view class="express_item item_cell_box">
+                    <view class="express_l">快递编号</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <input bindinput="expressnum" name="num" type="tel" value="" />
+                    </view>
+                </view>
+                <view class="tips">提示：无快递信息可不填写直接提交。</view>
+                <view bindtap="subexpress" class="my_btn express_btn">提交</view>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

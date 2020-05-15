@@ -1,0 +1,706 @@
+<block s-if="{{page}}">
+    <import src="/zxbddiy_sitetemp/resource/zan-ui/noticebar/index.swan"></import>
+    <view class="page fixbgimg" style="padding-bottom: {{page.basic.pbot}}px;background-color: {{page.basic.pagebg?page.basic.pagebg:''}};background-image: url('{{page.basic.bgimg}}');">
+        <include src="/zxbddiy_sitetemp/pages/common/vicead.swan" s-if="{{page.data[0].name!='webview'}}"></include>
+        <view s-for="{{page.data}}" s-for-index="oi">
+            <view class="page_slide" s-if="{{item.name=='slide'}}">
+                <swiper autoplay="{{item.params.ischange==0}}" data-no="{{item.id}}" duration="{{item.params.changelast}}" indicatorActiveColor="{{item.params.actcolor}}" indicatorColor="{{item.params.pointcolor}}" indicatorDots="{{item.params.showpoint==0}}" interval="{{item.params.changetime*1000}}" style="height:  {{item.params.imgheight?item.params.imgheight+'vw':item.params.data[item.params.current].height+'px'}}">
+                    <swiper-item s-for="{{item.params.data}}" s-for-item="img">
+                        <button catchtap="{{img.type=='tel'?'callphone':img.type=='map'?'location':img.type=='other'?'otherapp':img.type=='url'||!img.type?'navigateto':img.type=='weburl'?'toweburl':img.type=='images'?'showimages':img.type=='scan'?'scan':img.type?img.type:''}}" class="click_button" data-addname="{{img.addname}}" data-address="{{img.address}}" data-appid="{{img.appid}}" data-appurl="{{img.appurl}}" data-img="{{img.imagesdata}}" data-lat="{{img.lat}}" data-lng="{{img.lng}}" data-tel="{{img.tel}}" data-text="{{img.text}}" data-url="{{img.url}}" data-weburl="{{img.weburl}}" openType="{{img.type=='kefu'?'contact':img.type=='share'?'share':''}}" sessionFrom="{{img.sfrom}}">
+                            <image bindload="imageLoad" class="slide-image" data-inno="{{img.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{img.img}}" style="width:100%;height:{{item.params.imgheight?item.params.imgheight+'vw':img.height+'px'}};"></image>
+                        </button>
+                    </swiper-item>
+                </swiper>
+            </view>
+            <view class="page_nav fixbgimg" style="background-color:{{item.params.bgcolor}};background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='nav'}}">
+                <view class="item_cell_box">
+                    <view style="width: {{100/item.params.num}}%" s-if="{{idx<2&&item.params.num==2||idx<3&&item.params.num==3||idx<4&&item.params.num==4||idx<5&&item.params.num==5}}" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                        <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                            <view class="page_nav_item" style="padding: {{item.params.paddingv}}px 0">
+                                <view style="padding: 0 {{item.params.padding}}px">
+                                    <image class="page_nav_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="border-radius:{{item.params.radius}}px;width:{{item.params.imgwid?item.params.imgwid+'vw':'100%'}};height:{{item.params.imgheight?item.params.imgheight+'vw':'auto'}};"></image>
+                                </view>
+                                <view class="page_nav_title" style="color: {{item.params.fontcolor}};margin-top: {{item.params.martop}}px" s-if="{{nav.title}}">{{nav.title}}</view>
+                            </view>
+                        </button>
+                    </view>
+                </view>
+            </view>
+            <view class="page_image fixbgimg" style="background-image: url('{{item.params.bgimg}}');background-color:{{item.params.bgcolor}}" s-if="{{item.name=='image'}}">
+                <view class="item_cell_box" s-if="{{item.params.type<=3}}">
+                    <view style="width: {{item.params.type==1?100:item.params.type==2?50:33.3}}%" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                        <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                            <view class="page_image_item" style="padding: {{item.params.padding}}px">
+                              <view class="app_images_itemin" style="margin:{{item.params.padding}}px">
+                                    <image class="page_image_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="border-radius: {{item.params.radius}}px;width:{{item.params.pdimg}}%;height:{{item.params.imgheight?item.params.imgheight+'vw':'auto'}};"></image>
+                                    <view class="images_mengc" style="background-color:rgba({{item.params.mcbg.a}},{{item.params.mcbg.b}},{{item.params.mcbg.c}},{{item.params.trans/10}});border-radius:{{item.params.radius}}px;height:{{item.params.imgheight?item.params.imgheight+'vw':'auto'}}" s-if="{{item.params.ismengc==1}}">
+                                        <view class="images_mengc_text">
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mctsize}}px;" s-if="{{nav.mtitle}}">{{nav.mtitle}}</view>
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mcdsize}}px;" s-if="{{nav.mdesc}}">{{nav.mdesc}}</view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="page_image_title" style="color: {{item.params.fontcolor}};font-size: {{item.params.fontsize}}px;padding-top: {{item.params.fonttop}}px" s-if="{{nav.title&&item.params.istext==1}}">{{nav.title}}</view>
+                            </view>
+                        </button>
+                    </view>
+                </view>
+                <view class="item_cell_box app_images_type4" style="padding:{{item.params.padding}}px" s-if="{{item.params.type==4}}">
+                    <view style="width:50%" s-if="{{idx==0}}" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                        <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                            <view class="page_image_item" style="padding-right: {{item.params.pimg}}rpx">
+                                <view class="app_images_itemin">
+                                    <image class="img_jumi page_image_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="height:{{item.params.imgheight?item.params.imgheight+item.params.pimg/7.5+'vw':'auto'}};border-radius:{{item.params.radius}}px;"></image>
+                                    <view class="images_mengc" style="background-color:rgba({{item.params.mcbg.a}},{{item.params.mcbg.b}},{{item.params.mcbg.c}},{{item.params.trans/10}});border-radius:{{item.params.radius}}px;height:{{item.params.imgheight?item.params.imgheight+item.params.pimg/7.5+'vw':'auto'}}" s-if="{{item.params.ismengc==1}}">
+                                        <view class="images_mengc_text">
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mctsize}}px;" s-if="{{nav.mtitle}}">{{nav.mtitle}}</view>
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mcdsize}}px;" s-if="{{nav.mdesc}}">{{nav.mdesc}}</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </button>
+                    </view>
+                    <view style="width:50%">
+                        <view style="width:100%" s-if="{{idx>0}}" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                            <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                                <view class="page_image_item {{idx==2?'fix_jimu_img':''}}" style="height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}};padding-bottom: {{idx==1?item.params.pimg:0}}rpx;">
+                                    <view class="app_images_itemin">
+                                        <image class="img_jumi page_image_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}};border-radius:{{item.params.radius}}px;"></image>
+                                        <view class="images_mengc" style="background-color:rgba({{item.params.mcbg.a}},{{item.params.mcbg.b}},{{item.params.mcbg.c}},{{item.params.trans/10}});border-radius:{{item.params.radius}}px;height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}}" s-if="{{item.params.ismengc==1}}">
+                                            <view class="images_mengc_text">
+                                                <view style="color:{{item.params.mccolor}};font-size:{{item.params.mctsize}}px;" s-if="{{nav.mtitle}}">{{nav.mtitle}}</view>
+                                                <view style="color:{{item.params.mccolor}};font-size:{{item.params.mcdsize}}px;" s-if="{{nav.mdesc}}">{{nav.mdesc}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </button>
+                        </view>
+                    </view>
+                </view>
+                <view class="item_cell_box app_images_type4" style="padding:{{item.params.padding}}px" s-if="{{item.params.type==5}}">
+                    <view style="width:50%">
+                        <view style="width:100%" s-if="{{idx<2}}" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                            <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                                <view class="page_image_item {{idx==0?'fix_jimu_img':''}}" style="height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}};padding-bottom: {{idx==0?item.params.pimg:0}}rpx;">
+                                    <view class="app_images_itemin">
+                                        <image class="img_jumi page_image_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}};border-radius:{{item.params.radius}}px;"></image>
+                                        <view class="images_mengc" style="background-color:rgba({{item.params.mcbg.a}},{{item.params.mcbg.b}},{{item.params.mcbg.c}},{{item.params.trans/10}});border-radius:{{item.params.radius}}px;height:{{item.params.imgheight?item.params.imgheight/2+'vw':'auto'}}" s-if="{{item.params.ismengc==1}}">
+                                            <view class="images_mengc_text">
+                                                <view style="color:{{item.params.mccolor}};font-size:{{item.params.mctsize}}px;" s-if="{{nav.mtitle}}">{{nav.mtitle}}</view>
+                                                <view style="color:{{item.params.mccolor}};font-size:{{item.params.mcdsize}}px;" s-if="{{nav.mdesc}}">{{nav.mdesc}}</view>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </button>
+                        </view>
+                    </view>
+                    <view style="width:50%" s-if="{{idx==2}}" s-for="{{item.params.data}}" s-for-index="idx" s-for-item="nav">
+                        <button catchtap="{{nav.type=='tel'?'callphone':nav.type=='map'?'location':nav.type=='other'?'otherapp':nav.type=='url'||!nav.type?'navigateto':nav.type=='weburl'?'toweburl':nav.type=='images'?'showimages':nav.type=='scan'?'scan':nav.type?nav.type:''}}" class="click_button" data-addname="{{nav.addname}}" data-address="{{nav.address}}" data-appid="{{nav.appid}}" data-appurl="{{nav.appurl}}" data-img="{{nav.imagesdata}}" data-lat="{{nav.lat}}" data-lng="{{nav.lng}}" data-tel="{{nav.tel}}" data-text="{{nav.text}}" data-url="{{nav.url}}" data-weburl="{{nav.weburl}}" openType="{{nav.type=='kefu'?'contact':nav.type=='share'?'share':''}}" sessionFrom="{{nav.sfrom}}">
+                            <view class="page_image_item" style="height:{{item.params.imgheight?item.params.imgheight+item.params.pimg/7.5+'vw':'auto'}};padding-left:{{item.params.pimg}}rpx">
+                                <view class="app_images_itemin">
+                                    <image class="img_jumi page_image_img" data-inno="{{nav.id}}" data-no="{{item.id}}" mode="{{item.params.imgheight?'':'widthFix'}}" src="{{nav.img}}" style="height:{{item.params.imgheight?item.params.imgheight+item.params.pimg/7.5+'vw':'auto'}};border-radius:{{item.params.radius}}px;"></image>
+                                    <view class="images_mengc" style="background-color:rgba({{item.params.mcbg.a}},{{item.params.mcbg.b}},{{item.params.mcbg.c}},{{item.params.trans/10}});border-radius:{{item.params.radius}}px;height:{{item.params.imgheight?item.params.imgheight+item.params.pimg/7.5+'vw':'auto'}}" s-if="{{item.params.ismengc==1}}">
+                                        <view class="images_mengc_text">
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mctsize}}px;" s-if="{{nav.mtitle}}">{{nav.mtitle}}</view>
+                                            <view style="color:{{item.params.mccolor}};font-size:{{item.params.mcdsize}}px;" s-if="{{nav.mdesc}}">{{nav.mdesc}}</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </button>
+                    </view>
+                </view>
+            </view>
+            <view class="page_card fixbgimg" style="background-color:{{item.params.bgcolor}};margin:{{item.params.margin}}px;;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='card'}}">
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" class="click_button" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}">
+                    <view class="temp_card_top" style="font-size:{{item.params.headsize}}px;color:{{item.params.headcolor}};text-align:{{item.params.headalign}}" s-if="{{item.params.ishead==1}}">
+					{{item.params.headcontent}}
+				</view>
+                    <view class="temp_card_content" style="font-size:{{item.params.fontsize}}px;color:{{item.params.contentcolor}};text-indent:{{item.params.indent}}px">
+					{{item.params.content}} <text style="color:{{item.params.noticecolor}}"> {{item.params.notice}} </text>
+                    </view>
+                    <view class="temp_card_bot" style="font-size:{{item.params.botsize}}px;color:{{item.params.botcolor}};text-align:{{item.params.botalign}}" s-if="{{item.params.isbot==1}}">
+					{{item.params.botcontent}}
+				</view>
+                </button>
+            </view>
+            <view class="page_space" style="height:{{item.params.height}}px;background:{{item.params.bgcolor}}" s-if="{{item.name=='space'}}"></view>
+            <block s-if="{{item.name=='text'}}">
+                <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+                <view class="page_text" style="padding:{{item.params.padding}}px;margin:{{item.params.margin}}px;background:{{item.params.bgcolor}}">
+                    <template is="bdParse" data="{{bdParseData:item.params.node.nodes}}"></template>
+                </view>
+            </block>
+            <view class="page_list" style="background:{{item.params.bgcolor}};padding:{{item.params.padding}}px" s-if="{{item.name=='list'}}">
+                <view class="page_list_item" s-for="{{item.params.data}}" s-for-item="in">
+                    <button catchtap="{{in.type=='tel'?'callphone':in.type=='map'?'location':in.type=='other'?'otherapp':in.type=='url'||!in.type?'navigateto':in.type=='weburl'?'toweburl':in.type=='images'?'showimages':in.type=='scan'?'scan':in.type?in.type:''}}" class="click_button" data-addname="{{in.addname}}" data-address="{{in.address}}" data-appid="{{in.appid}}" data-appurl="{{in.appurl}}" data-img="{{in.imagesdata}}" data-lat="{{in.lat}}" data-lng="{{in.lng}}" data-tel="{{in.tel}}" data-text="{{in.text}}" data-url="{{in.url}}" data-weburl="{{in.weburl}}" openType="{{in.type=='kefu'?'contact':in.type=='share'?'share':''}}" sessionFrom="{{in.sfrom}}">
+                        <view class="item_cell_box alenter">
+                            <view class="list_img">
+                                <image class="page_list_img" data-inno="{{in.id}}" data-no="{{item.id}}" src="{{in.img}}" style="width:{{item.params.imgwidth}}px;height:{{item.params.imgheight}}px;"></image>
+                            </view>
+                            <view class="item_cell_flex list_r">
+                                <view class="list_title" style="color:{{item.params.color}};font-size:{{item.params.titlesize}}px">
+								{{in.title}}
+							</view>
+                                <view class="list_desc" style="color:{{item.params.color}};font-size:{{item.params.descsize}}px">
+								{{in.desc}}
+							</view>
+                            </view>
+                        </view>
+                    </button>
+                </view>
+            </view>
+            <view class="page_title fixbgimg" style="background-color:{{item.params.bgcolor}};padding:{{item.params.paddingv}}px 0px;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='title'}}">
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" class="click_button" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}">
+                    <view class="item_cell_box alenter" style="padding:0px {{item.params.paddingh}}px;border-left:{{item.params.leftbord==1?'4px solid '+item.params.bordbg:0}}">
+                        <view class="title_img" s-if="{{item.params.lefticon==1}}">
+                            <image class="page_title_img" mode="widthFix" src="{{item.params.leftimg}}" style="width:{{item.params.lwidth}}px"></image>
+                        </view>
+                        <view class="item_cell_flex title_img_m" style="text-align:{{item.params.pos}};font-size: {{item.params.size}}px;color: {{item.params.color}}">
+                            <image class="page_title_img" mode="widthFix" src="{{item.params.fontimg}}" style="width:{{item.params.fontwidth}}px" s-if="{{item.params.fontimg&&item.params.fonticon==1}}"></image>
+						{{item.params.content}}
+					</view>
+                        <view class="temp_title_rfont" style="color:{{item.params.rfontcolor}}" s-if="{{item.params.rightfont}}">
+						{{item.params.rightfont}}
+					</view>
+                        <view class="title_img" s-if="{{item.params.righticon==1}}">
+                            <image class="page_title_img" mode="widthFix" src="{{item.params.rightimg}}" style="width:{{item.params.rwidth}}px"></image>
+                        </view>
+                    </view>
+                </button>
+            </view>
+            <view class="page_title" style="background:linear-gradient(to bottom,{{item.params.bgcolor}},{{item.params.tobgcolor}});padding:{{item.params.padding}}px {{item.params.paddingv}}px;');" s-if="{{item.name=='ad'}}">
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" class="click_button" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}" s-if="{{item.params.adtype==0}}">
+                    <view class="item_cell_box alenter">
+                        <view class="title_img ad_img" s-if="{{item.params.leftimg}}">
+                            <image class="page_title_img" src="{{item.params.leftimg}}" style="width:{{item.params.imgwidth}}px;');"></image>
+                        </view>
+                        <template is="zan-noticebar" data="{{...item.params,componentId:'ad'+oi}}"></template>
+                    </view>
+                </button>
+                <view s-else>
+                    <view class="item_cell_box alenter">
+                        <view class="title_img ad_img" s-if="{{item.params.leftimg}}">
+                            <image class="page_title_img" src="{{item.params.leftimg}}" style="width:{{item.params.imgwidth}}px;');"></image>
+                        </view>
+                        <swiper autoplay="true" circular="true" duration="2000" indicatorDots="{{false}}" interval="3000" style="width: 100%;height:{{item.params.height}}px;line-height:{{item.params.height}}px;}}" vertical="true">
+                            <swiper-item s-for="{{item.params.data}}" s-for-item="img">
+                                <button catchtap="{{img.type=='tel'?'callphone':img.type=='map'?'location':img.type=='other'?'otherapp':img.type=='url'||!img.type?'navigateto':img.type=='weburl'?'toweburl':img.type=='images'?'showimages':img.type=='scan'?'scan':img.type?img.type:''}}" class="click_button" data-addname="{{img.addname}}" data-address="{{img.address}}" data-appid="{{img.appid}}" data-appurl="{{img.appurl}}" data-img="{{img.imagesdata}}" data-lat="{{img.lat}}" data-lng="{{img.lng}}" data-tel="{{img.tel}}" data-text="{{img.text}}" data-url="{{img.url}}" data-weburl="{{img.weburl}}" openType="{{img.type=='kefu'?'contact':img.type=='share'?'share':''}}" sessionFrom="{{img.sfrom}}" style="color:{{item.params.color}}!important;font-size:{{item.params.fontsize}}px!important;">
+									{{img.text}}
+								</button>
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                </view>
+            </view>
+            <view class="page_form fixbgimg" style="background-color:{{item.params.bgcolor}};padding:{{item.params.padding}}px;;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='form'}}">
+                <form bindsubmit="formSubmit">
+                    <view class="page_form_item" s-for="{{item.params.data}}" s-for-item="v">
+                        <view class="app_form_item" s-if="{{v.type=='input'}}">
+                            <view class="" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r">
+                                <input class="show_form_input" name="{{v.name}}" placeholder="{{v.pla}}" placeholderStyle="color:{{item.params.placolor}}" style="border-radius: {{v.radius?v.radius:0}}px" type="text" />
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='img'}}">
+                            <view class="" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r">
+                                <view class="app_form_addimg" s-for="{{v.upimgar}}" s-for-item="in">
+                                    <image bindtap="deleteImg" data-id="{{item.id}}" data-iid="{{v.id}}" data-mid="{{in.id}}" src="{{in.url}}"></image>
+                                </view>
+                                <view bindtap="uploadimg" class="app_form_addimg" data-id="{{item.id}}" data-item="{{v}}" style="color:{{item.params.placolor}};border:1px solid {{item.params.placolor}}">＋</view>
+                                <input maxlength="-1" name="{{v.name}}" style="display: none;" type="text" value="{{v.upimgarstr}}" />
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='text'}}">
+                            <view class="" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r">
+                                <textarea class="show_form_text" name="{{v.name}}" placeholder="{{v.pla}}" placeholderStyle="color:{{item.params.placolor}}" style="border-radius: {{v.radius?v.radius:0}}px"></textarea>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='time'}}">
+                            <view class="show_form_l" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" data-n="{{v.id}}" end="2155-01-01" mode="date" name="{{v.name}}" start="0001-01-01" style="color:{{item.params.placolor}};" value="">
+							    {{v.value?v.value:v.pla?v.pla:'选择日期'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='times'}}">
+                            <view class="show_form_l" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" data-n="{{v.id}}" mode="time" name="{{v.name}}" style="color:{{item.params.placolor}};" value="">
+							    {{v.value?v.value:v.pla?v.pla:'选择时间'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item item_cell_box" s-if="{{v.type=='city'}}">
+                            <view class="show_form_l" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r border_bot">
+                                <picker bindchange="bindformChange" class="font_999" data-i="{{item.id}}" data-n="{{v.id}}" mode="region" name="{{v.name}}" style="color:{{item.params.placolor}};" value="">
+							    {{v.value?v.value[0]+'，'+v.value[1]+'，'+v.value[2]:v.pla?v.pla:'选择城市'}}
+							</picker>
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='radio'}}">
+                            <view class="" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r">
+                                <radio-group bindchange="bindformChange" class="radio-group item_cell_box form_radio_box" data-i="{{item.id}}" data-n="{{v.id}}" name="{{v.name}}">
+                                    <label class="radio item_cell_box alenter alenter_radio" s-for="{{v.data}}" s-for-item="vv">
+                                        <radio class="radio_item radio_hide" value="{{vv.name}}"></radio>
+                                        <view class="zan-icon {{vv.name==v.value?'zan-icon-checked radio_checked':'zan-icon-check radio_unchecked'}} radio_checkitem " style="{{v.color&&vv.name==v.value?'color:'+v.color:''}}"></view>
+                                        <view class="show_form_inname">{{vv.name}}</view>
+                                    </label>
+                                </radio-group>
+                            </view>
+                        </view>
+                        <view class="app_form_item" s-if="{{v.type=='checkbox'}}">
+                            <view class="" style="color:{{item.params.color}};" s-if="{{v.hidename!=1}}">{{v.name}}</view>
+                            <view class="show_form_r">
+                                <checkbox-group bindchange="bindformChange" class="item_cell_box form_radio_box" data-i="{{item.id}}" data-n="{{v.id}}" data-type="checkbox" name="{{v.name}}">
+                                    <label class="checkbox item_cell_box alenter alenter_radio" s-for="{{v.data}}" s-for-item="vv">
+                                        <checkbox class="radio_item radio_hide " value="{{vv.name}}"></checkbox>
+                                        <view class="zan-icon {{vv.checked?'zan-icon-checked radio_checked':'zan-icon-check radio_unchecked'}} radio_checkitem " style="{{v.color&&vv.checked?'color:'+v.color:''}}"></view>
+                                        <view class="show_form_inname">{{vv.name}}</view>
+                                    </label>
+                                </checkbox-group>
+                            </view>
+                        </view>
+                    </view>
+                    <input name="zxbddiy_sitetemp_fid" style="display: none;" type="text" value="{{item.id}}" />
+                    <button class="app_form_submit" data-id="1" formType="submit" style="background:{{item.params.btnbg}};color:{{item.params.btncolor}}">提交</button>
+                </form>
+            </view>
+            <view class="page_news" style="background:{{item.params.bgcolor}};padding:{{item.params.padding}}px" s-if="{{item.name=='newstitle'}}">
+                <view class="temp_news_title" style="font-size:{{item.params.size}}px;color:{{item.params.color}}">
+				{{item.params.content}}
+			</view>
+                <view class="temp_news_time" style="color:{{item.params.color2}}">
+                    <text style="margin-right: 10px;" s-if="{{item.params.author}}">{{item.params.author}}</text>
+                    <text>{{item.params.time}}</text>
+                </view>
+            </view>
+            <view class="page_video" style="background:{{item.params.bgcolor}};padding:{{item.params.padding}}px" s-if="{{item.name=='video'}}">
+                <view class="section tc">
+                    <view s-if="{{item.params.showtype==0||!item.params.showtype}}">
+                        <video controls autoplay="{{item.params.isauto==0?true:false}}" objectFit="contain" poster="{{item.params.thumb}}" src="{{item.params.url}}" s-if="{{item.params.type==1}}"></video>
+                        <video controls autoplay="{{item.params.isauto==0?true:false}}" objectFit="contain" poster="{{item.params.thumb}}" src="{{item.params.upurl}}" style="display:{{item.params.upurl?'block':'none'}}" s-if="{{item.params.type==0}}"></video>
+                        <view class="page_video_wait" s-if="{{item.params.type==0&&!item.params.upurl}}">视频加载中</view>
+                    </view>
+                    <view bindtap="showvedio" class="video_bgbox" data-url="{{item.params.type==0?item.params.upurl:item.params.url}}" s-else>
+                        <view class="video_bgimg video_bgimg_icon">
+                            <image class="" mode="widthFix" src="/images/v.png"></image>
+                        </view>
+                        <image class="video_bgimg" mode="widthFix" src="{{item.params.thumb}}"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="page_btn item_cell_box fixbgimg" style="background-color:{{item.params.mbg}};padding:{{item.params.padding}}px;background-image: url('{{item.params.bgimg}}')" s-if="{{item.name=='btn'}}">
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" class="click_button" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" hoverClass="none" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}" style="background:{{item.params.bgcolor}}!important;color:{{item.params.color}}!important;font-size:{{item.params.size}}px!important;height:{{item.params.height}}px!important;line-height:{{item.params.height}}px!important;width:{{item.params.width}}%!important;border-radius:{{item.params.radius}}px!important;border:1px solid {{item.params.bordercolor}}!important">
+				{{item.params.text}}
+			</button>
+                <button catchtap="{{item.params.data[0].type=='tel'?'callphone':item.params.data[0].type=='map'?'location':item.params.data[0].type=='other'?'otherapp':item.params.data[0].type=='url'||!item.params.data[0].type?'navigateto':item.params.data[0].type=='weburl'?'toweburl':item.params.data[0].type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.data[0].type?item.params.data[0].type:''}}" class="click_button" data-addname="{{item.params.data[0].addname}}" data-address="{{item.params.data[0].address}}" data-appid="{{item.params.data[0].appid}}" data-appurl="{{item.params.data[0].appurl}}" data-img="{{item.params.data[0].imagesdata}}" data-lat="{{item.params.data[0].lat}}" data-lng="{{item.params.data[0].lng}}" data-tel="{{item.params.data[0].tel}}" data-text="{{item.params.data[0].text}}" data-url="{{item.params.data[0].url}}" data-weburl="{{item.params.data[0].weburl}}" hoverClass="none" openType="{{item.params.data[0].type=='kefu'?'contact':item.params.data[0].type=='share'?'share':''}}" sessionFrom="{{item.params.data[0].sfrom}}" style="background:{{item.params.bgcolor}}!important;color:{{item.params.color}}!important;font-size:{{item.params.size}}px!important;height:{{item.params.height}}px!important;line-height:{{item.params.height}}px!important;width:{{item.params.width}}%!important;border-radius:{{item.params.radius}}px!important;border:1px solid {{item.params.bordercolor}}!important" s-if="{{item.params.num==1}}">
+				{{item.params.data[0].text}}
+			</button>
+            </view>
+            <view class="page_btn item_cell_box" style="background-color:{{item.params.mbg}};padding:{{item.params.paddingv}}px 0;" s-if="{{item.name=='groupbtn'}}">
+                <button catchtap="{{in.type=='tel'?'callphone':in.type=='map'?'location':in.type=='other'?'otherapp':in.type=='url'||!in.type?'navigateto':in.type=='weburl'?'toweburl':in.type=='images'?'showimages':in.type=='scan'?'scan':in.type?in.type:''}}" class="click_button" data-addname="{{in.addname}}" data-address="{{in.address}}" data-appid="{{in.appid}}" data-appurl="{{in.appurl}}" data-img="{{in.imagesdata}}" data-lat="{{in.lat}}" data-lng="{{in.lng}}" data-tel="{{in.tel}}" data-text="{{in.text}}" data-url="{{in.url}}" data-weburl="{{in.weburl}}" hoverClass="none" openType="{{in.type=='kefu'?'contact':in.type=='share'?'share':''}}" sessionFrom="{{in.sfrom}}" style="width:{{100/item.params.data.length}}%!important;padding: 0 {{item.params.mar}}vw!important" s-for="{{item.params.data}}" s-for-item="in">
+                    <view class="app_gbtn_itemin" style="background: {{item.params.bgcolor}};color:{{item.params.color}};font-size:{{item.params.size}}px;padding:{{item.params.inpaddingh}}px {{item.params.inpaddingw}}px;border:1px solid {{item.params.bordercolor}};border-radius:{{item.params.radius}}px">
+					{{in.title}}
+				</view>
+                </button>
+            </view>
+            <view class="page_toshop fixbgimg" style="background-color:{{item.params.bgcolor}};padding:{{item.params.padding}}px 0;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='toshop'}}">
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" class="click_button" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" hoverClass="none" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}">
+                    <view class="item_cell_box toshop_box">
+                        <view class="item_cell_flex">
+                            <view class="toshop_name" style="color:{{item.params.topcolor}}">{{item.params.name}}</view>
+                            <view class="toshop_desc" style="color:{{item.params.botcolor}}">{{item.params.address}}</view>
+                        </view>
+                        <view class="toshop_loc">
+                            <image mode="widthFix" src="{{item.params.loc}}"></image>
+                        </view>
+                    </view>
+                </button>
+            </view>
+            <view class="page_fix" style="background:{{item.params.mbg}};padding:{{item.params.padding}}px;top:{{item.params.top}}%;right:{{item.params.right}}%;border-radius:{{item.params.radius}}px" s-if="{{item.name=='fix'}}">
+                <navigator hoverClass="none" openType="navigate" url="{{item.params.url}}" s-if="{{item.params.type=='url'}}">
+                    <image src="{{item.params.img}}" style="width:{{item.params.width}}vw;height:{{item.params.height}}vw"></image>
+                </navigator>
+                <button catchtap="{{item.params.type=='tel'?'callphone':item.params.type=='map'?'location':item.params.type=='other'?'otherapp':item.params.type=='url'||!item.params.type?'navigateto':item.params.type=='weburl'?'toweburl':item.params.type=='images'?'showimages':item.params.type=='scan'?'scan':item.params.type?item.params.type:''}}" data-addname="{{item.params.addname}}" data-address="{{item.params.address}}" data-appid="{{item.params.appid}}" data-appurl="{{item.params.appurl}}" data-img="{{item.params.imagesdata}}" data-lat="{{item.params.lat}}" data-lng="{{item.params.lng}}" data-tel="{{item.params.tel}}" data-text="{{item.params.text}}" data-url="{{item.params.url}}" data-weburl="{{item.params.weburl}}" openType="{{item.params.type=='kefu'?'contact':item.params.type=='share'?'share':''}}" sessionFrom="{{item.params.sfrom}}" style="background:{{item.params.mbg}}" s-else>
+                    <image src="{{item.params.img}}" style="width: {{item.params.width}}vw;height: {{item.params.height}}vw;"></image>
+                </button>
+            </view>
+            <view class="page_article fixbgimg" style="background-color:{{item.params.bgcolor}};padding:{{item.params.paddingv}}px {{item.params.paddings}}px;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='article'}}">
+                <view class="temp_article_head" style="font-size:{{item.params.topsize}}px;color:{{item.params.topcolor}}" s-if="{{item.params.title&&item.params.type!=3}}">
+				{{item.params.title}}
+			</view>
+                <view class="temp_article_list {{item.params.type==3?'temp_article3_list':''}}">
+                    <navigator class="article_list_item item_cell_box" hoverClass="none" url="{{r.url}}" s-if="{{!item.params.type}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_list_l">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="item_cell_flex article_list_r">
+                            <view class="article_list_title" style="color:{{item.params.titlecolor}}">{{r.title}}</view>
+                            <view class="item_cell_box article_list_time" style="color:{{item.params.timecolor}}" s-if="{{item.params.istime==0||!item.params.istime}}">
+                                <view class="">{{r.time}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                    <navigator class="article_style1 article_item" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==1}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_img">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="article_title" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                    </navigator>
+                    <navigator class="article_style2 article2_item item_cell_box" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==2}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article2_l item_cell_flex" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                        <view class="article2_r" style="color:{{item.params.timecolor}}" s-if="{{item.params.istime==0||!item.params.istime}}">
+						{{r.time}}
+					</view>
+                    </navigator>
+                    <navigator class="article_style3 article_item" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==3}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_img">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="article_title" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                    </navigator>
+                    <view class="good5_more_box" s-if="{{item.params.botfont&&item.params.type==3}}">
+                        <view bindtap="navigateto" class="temp_good_more temp_good5_more" data-url="{{item.params.url}}" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+						{{item.params.botfont}}
+					</view>
+                    </view>
+                </view>
+                <view class="temp_article_bot" s-if="{{item.params.botfont&&item.params.type!=3}}">
+                    <navigator class="temp_article_more" hoverClass="none" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}" url="{{item.params.url?item.params.url:'/zxbddiy_sitetemp/pages/artlist/artlist'}}">
+					{{item.params.botfont}}
+				</navigator>
+                </view>
+            </view>
+            <view class="page_article fixbgimg" style="background-color:{{item.params.bgcolor}};padding:{{item.params.paddingv}}px {{item.params.paddings}}px;background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='product'}}">
+                <view class="temp_article_head" style="font-size:{{item.params.topsize}}px;color:{{item.params.topcolor}}" s-if="{{item.params.title&&item.params.type!=3}}">
+				{{item.params.title}}
+			</view>
+                <view class="temp_article_list {{item.params.type==3?'temp_article3_list':''}}">
+                    <navigator class="article_list_item item_cell_box" hoverClass="none" url="{{r.url}}" s-if="{{!item.params.type}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_list_l">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="item_cell_flex article_list_r">
+                            <view class="article_list_title" style="color:{{item.params.titlecolor}}">{{r.title}}</view>
+                        </view>
+                    </navigator>
+                    <navigator class="article_style1 article_item" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==1}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_img">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="article_title" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                    </navigator>
+                    <navigator class="article_style2 article2_item item_cell_box" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==2}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article2_l item_cell_flex" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                    </navigator>
+                    <navigator class="article_style3 article_item" hoverClass="none" url="{{r.url}}" s-if="{{item.params.type==3}}" s-for="{{item.artlist}}" s-for-item="r">
+                        <view class="article_img">
+                            <image mode="widthFix" src="{{r.img}}"></image>
+                        </view>
+                        <view class="article_title" style="color:{{item.params.titlecolor}}">
+						{{r.title}}
+					</view>
+                    </navigator>
+                    <view class="good5_more_box" s-if="{{item.params.botfont&&item.params.type==3}}">
+                        <view bindtap="navigateto" class="temp_good_more temp_good5_more" data-url="{{item.params.url?item.params.url:'/zxbddiy_sitetemp/pages/product/list'}}" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+						{{item.params.botfont}}
+					</view>
+                    </view>
+                </view>
+                <view bindtap="navigateto" class="temp_good_bot" data-url="{{item.params.url?item.params.url:'/zxbddiy_sitetemp/pages/product/list'}}" s-if="{{item.params.botfont&&item.params.type!=3}}">
+                    <view class="temp_good_more" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+					{{item.params.botfont}}
+				</view>
+                </view>
+            </view>
+            <web-view src="{{item.params.url}}" s-if="{{item.name=='webview'}}"></web-view>
+            <view class="temp_item temp_item_good " style="padding:{{item.params.paddingv}}px 0;background:{{item.params.bgcolor}}" s-if="{{item.name=='goods'||item.name=='ogoods'}}">
+                <view class="temp_item_goodbox" s-if="{{item.params.style!=5}}">
+                    <view bindtap="navigateto" class="temp_good_item temp_good1_item" data-url="{{initem.url}}" s-if="{{item.params.style==1}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good1_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good1_title" style="text-align:{{item.params.titlepos}}" s-if="{{!item.params.istitle}}">
+						{{initem.title}}
+					</view>
+                        <view class="item_cell_box temp_good1_bot" s-if="{{!item.params.isprice}}">
+                            <view class="temp_good1_botl">
+                                <text class="temp_good1_now">￥<text class="temp_good1_nowprice">{{initem.price}}</text>
+                                </text>
+                                <text class="temp_good1_old" s-if="{{initem.oldprice*1>0}}">￥{{initem.oldprice}}</text>
+                            </view>
+                            <view class="temp_good1_botr item_cell_flex">
+                                <text class="temp_good1_buy">购买</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good2_item" data-url="{{initem.url}}" s-if="{{item.params.style==2}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good2_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="item_cell_box temp_good2_bot">
+                            <view class="temp_good2_botl">
+                                <view class="temp_good2_now">￥<text class="temp_good2_nowprice">{{initem.price}}</text>
+                                </view>
+                            </view>
+                            <view class="temp_good2_botr item_cell_flex">
+                                <text class="temp_good2_buy">购买</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good2_item" data-url="{{initem.url}}" s-if="{{item.params.style==3}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good2_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good2_title" style="text-align:{{item.params.titlepos}}" s-if="{{!item.params.istitle}}">
+						{{initem.title}}
+					</view>
+                        <view class="item_cell_box temp_good2_bot" s-if="{{!item.params.isprice}}">
+                            <view class="temp_good2_botl">
+                                <view class="temp_good2_now">￥<text class="temp_good2_nowprice">{{initem.price}}</text>
+                                </view>
+                            </view>
+                            <view class="temp_good2_botr item_cell_flex">
+                                <text class="temp_good2_buy">购买</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good4_item" data-url="{{initem.url}}" s-if="{{item.params.style==4}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good4_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good2_title" style="text-align:{{item.params.titlepos}}" s-if="{{!item.params.istitle}}">
+						{{initem.title}}
+					</view>
+                        <view class="item_cell_box temp_good4_bot" s-if="{{!item.params.isprice}}">
+                            <view class="temp_good4_botl">
+                                <view class="temp_good4_now">￥<text class="temp_good4_nowprice">{{initem.price}}</text>
+                                </view>
+                            </view>
+                            <view class="temp_good4_botr item_cell_flex" s-if="{{initem.oldprice*1>0}}">
+							￥{{initem.oldprice}}
+						</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="temp_item_goodbox temp_item5_goodbox" s-if="{{item.params.style==5}}">
+                    <view bindtap="navigateto" class="temp_good_item temp_good4_item temp_good5_item" data-url="{{initem.url}}" s-if="{{item.params.style==5}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good5_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good2_title temp_good5_title" style="text-align:{{item.params.titlepos}}" s-if="{{!item.params.istitle}}">
+						{{initem.title}}
+					</view>
+                        <view class="item_cell_box temp_good4_bot" s-if="{{!item.params.isprice}}">
+                            <view class="temp_good4_botl">
+                                <view class="temp_good4_now">￥<text class="temp_good4_nowprice">{{initem.price}}</text>
+                                </view>
+                            </view>
+                            <view class="temp_good4_botr item_cell_flex" s-if="{{initem.oldprice*1>0}}">
+							￥{{initem.oldprice}}
+						</view>
+                        </view>
+                    </view>
+                    <view class="good5_more_box" s-if="{{item.params.botfont&&item.params.style==5}}">
+                        <view bindtap="navigateto" class="temp_good_more temp_good5_more" data-url="{{item.params.url}}" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+						{{item.params.botfont}}
+					</view>
+                    </view>
+                </view>
+                <view bindtap="navigateto" class="temp_good_bot" data-url="{{item.params.url}}" s-if="{{item.params.botfont&&item.params.style!=5}}">
+                    <view class="temp_good_more" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+					{{item.params.botfont}}
+				</view>
+                </view>
+            </view>
+            <view class="temp_item temp_item_search" style="padding:{{item.params.paddingv}}px {{item.params.paddingh}}px;background:{{item.params.bgcolor}}" s-if="{{item.name=='searchgoods'}}">
+                <view bindtap="toggleRightPopup" class="search_input_box" style="border-radius:{{item.params.radius}}px;background-color:{{item.params.incolor}};color:{{item.params.placolor}}">
+                    <text class="zan-icon zan-icon-search"></text>{{item.params.pla}}
+			</view>
+            </view>
+            <view class="temp_item temp_item_search" style="padding:{{item.params.paddingv}}px {{item.params.paddingh}}px;background:{{item.params.bgcolor}}" s-if="{{item.name=='searchart'}}">
+                <view bindtap="toggleRightPopupart" class="search_input_box" style="border-radius:{{item.params.radius}}px;background-color:{{item.params.incolor}};color:{{item.params.placolor}}">
+                    <text class="zan-icon zan-icon-search"></text>{{item.params.pla}}
+			</view>
+            </view>
+            <view class="temp_item temp_item_appoint fixbgimg " style="padding:{{item.params.paddingv}}px 0;background-color:{{item.params.bgcolor}};background-image: url('{{item.params.bgimg}}');" s-if="{{item.name=='appoint'}}">
+                <view class="temp_item_appointbox {{item.params.style==4?'temp_item4_appointbox':''}}" style="padding:{{item.params.style==1?'0 10rpx':'0'}};">
+                    <view bindtap="navigateto" class="appoint_item" data-url="{{initem.url}}" s-if="{{item.params.style==1}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="appoint_top item_cell_box" style="background:{{item.params.topbgcolor}}">
+                            <view class="appoint_head">
+                                <image src="{{initem.thumb}}"></image>
+                            </view>
+                            <view class="appoint_info item_cell_flex" style="color:{{item.params.topcolor}}">
+                                <view class="appoint_name">{{initem.name}}</view>
+                                <view class="appoint_desc">{{initem.desc}}</view>
+                            </view>
+                            <view class="appoint_price" style="color:{{item.params.pricecolor}}">
+                                <view s-if="{{initem.ispay==1}}">
+								￥ <text class="appoint_pricenum">{{initem.price*100/100}}</text>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="appoint_bot item_cell_box">
+                            <view class="appoint_data item_cell_flex">已被约：{{initem.num}}</view>
+                            <view class="appoint_btn" style="background:{{item.params.fontbgcolor}};color:{{item.params.fontcolor}}">{{item.params.btnfont?item.params.btnfont:'预约'}}</view>
+                        </view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good2_item" data-url="{{initem.url}}" s-if="{{item.params.style==2}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good2_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good2_item" data-url="{{initem.url}}" s-if="{{item.params.style==3}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good2_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good2_title">
+						{{initem.name}}
+					</view>
+                    </view>
+                    <view bindtap="navigateto" class="temp_good_item temp_good2_item temp_app4_item" data-url="{{initem.url}}" s-if="{{item.params.style==4}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <view class="temp_good2_img temp_app4_img">
+                            <image mode="widthFix" src="{{initem.thumb}}"></image>
+                        </view>
+                        <view class="temp_good2_title">
+						{{initem.name}}
+					</view>
+                    </view>
+                    <view s-if="{{item.params.botfont&&item.params.style==4}}">
+                        <view class="temp_good_more temp_good5_more temp_app5_more" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+						{{item.params.botfont}}
+					</view>
+                    </view>
+                </view>
+                <view bindtap="navigateto" class="temp_good_bot" data-url="{{item.params.url}}" s-if="{{item.params.botfont&&item.params.style!=4}}">
+                    <view class="temp_good_more" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+					{{item.params.botfont}}
+				</view>
+                </view>
+            </view>
+            <view class="temp_map" style="background:{{item.params.bgcolor}};padding:{{item.params.padding}}px" s-if="{{item.name=='map'}}">
+                <map showLocation latitude="{{item.params.lat}}" longitude="{{item.params.lng}}" markers="[ { id:item.id,latitude:item.params.lat,longitude:item.params.lng,title:'111111111',iconPath:'/images/loc.png',width:20,height:26,callout:{content:item.params.addname+'\n'+item.params.address,color:item.params.fontcolor?item.params.fontcolor:'#ed414a',bgColor:item.params.fontbg?item.params.fontbg:'#ffffff',borderRadius:3,padding:5,display:'ALWAYS'} } ]" scale="13" style="width: 100%; height: {{item.params.height}}px;"></map>
+            </view>
+            <view class="temp_item temp_item_actcard " style="padding:{{item.params.padding}}px;background-color:{{item.params.bgcolor}};" s-if="{{item.name=='actcard'}}">
+                <view class="temp_item_appointbox">
+                    <view bindtap="navigateto" class="app-card" data-url="{{initem.url}}" s-for="{{item.params.data}}" s-for-item="initem">
+                        <text class="arrow_up card_cut_up" style="border-top-color:{{item.params.bgcolor}}"></text>
+                        <text class="arrow_up card_cut_down" style="border-bottom-color:{{item.params.bgcolor}}"></text>
+                        <view class="app-card-value item_cell_box" style="background:{{item.params.topbgcolor}}">
+                            <view class="card_value" style="color:{{item.params.pricecolor}}" s-if="{{initem.type==0}}">
+                                <text class="app-card-value-inco">￥</text>
+                                <text class="app-card-value-num">{{initem.value*100/100}}</text>
+                            </view>
+                            <view class="card_value" style="color:{{item.params.pricecolor}}" s-if="{{initem.type==1}}">
+                                <text class="app-card-value-num">{{initem.value*100/100}}</text>
+                                <text class="app-card-value-inco">折</text>
+                            </view>
+                            <view class="item_cell_flex app-card-condition" style="color:{{item.params.usecolor}}">满{{initem.useleast*100/100}}使用</view>
+                        </view>
+                        <view class="app-card-bottom" style="background:{{item.params.botbgcolor}};color:{{item.params.namecolor}}">
+                            <view>{{initem.name}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="navigateto" class="temp_good_bot" data-url="{{item.params.url}}" s-if="{{item.params.botfont}}">
+                    <view class="temp_good_more" style="border:1px solid {{item.params.botbord}};color:{{item.params.botcolor}}">
+					{{item.params.botfont}}
+				</view>
+                </view>
+            </view>
+            <ad unitId="{{item.params.code}}" s-if="{{item.name=='wxad'}}"></ad>
+            <view class="temp_user fixbgimg" style="background-color:{{item.params.bgcolor}};background-image: url('{{item.params.bgimg}}');padding: {{item.params.topbot}}px 20px" s-if="{{item.name=='head'}}">
+                <view class="head_box head_style1" s-if="{{item.params.style==0}}">
+                    <image class="temp_head_headimg" src="{{wxuser.headimgurl?wxuser.headimgurl:wxuser.avatar?wxuser.avatar:item.params.headimg}}"></image>
+                    <view class="temp_head_nick" style="color:{{item.params.nickcolor}};font-size:{{item.params.nicksize}}px">{{wxuser.nickname}}</view>
+                </view>
+                <view class="head_box head_style2 item_cell_box" s-if="{{item.params.style==1}}">
+                    <image class="temp_head_headimg" src="{{wxuser.headimgurl?wxuser.headimgurl:wxuser.avatar?wxuser.avatar:item.params.headimg}}"></image>
+                    <view class="temp_head_nick item_cell_flex" style="color:{{item.params.nickcolor}};font-size:{{item.params.nicksize}}px">{{wxuser.nickname}}</view>
+                </view>
+            </view>
+            <view class="temp_item_link " style="background-color:{{item.params.bgcolor}};padding:{{item.params.padding}}px {{item.params.paddingv}}px;" s-if="{{item.name=='link'}}">
+                <button catchtap="{{in.type=='tel'?'callphone':in.type=='map'?'location':in.type=='other'?'otherapp':in.type=='url'||!in.type?'navigateto':in.type=='weburl'?'toweburl':in.type=='images'?'showimages':in.type=='scan'?'scan':in.type?in.type:''}}" class="click_button temp_item_linkbtn" data-addname="{{in.addname}}" data-address="{{in.address}}" data-appid="{{in.appid}}" data-appurl="{{in.appurl}}" data-img="{{in.imagesdata}}" data-lat="{{in.lat}}" data-lng="{{in.lng}}" data-tel="{{in.tel}}" data-text="{{in.text}}" data-url="{{in.url}}" data-weburl="{{in.weburl}}" openType="{{in.type=='kefu'?'contact':in.type=='share'?'share':''}}" sessionFrom="{{in.sfrom}}" s-for="{{item.params.data}}" s-for-item="in">
+                    <view class="item_cell_box temp_link_item" style="color:item.params.color;padding:{{item.params.pin}}px 0px;border-bottom:{{item.params.isborder==0?'1rpx solid '+item.params.bdcolor:0}}">
+                        <view class="temp_link_img" s-if="{{in.img}}">
+                            <image src="{{in.img}}"></image>
+                        </view>
+                        <view class="item_cell_flex temp_link_text" style="color:{{item.params.fontcolor}};font-size:{{item.params.fontsize}}px;">
+			            {{in.text}}
+			        </view>
+                        <view class="icon_r temp_link_r"></view>
+                    </view>
+                </button>
+            </view>
+            <block s-if="{{item.name=='tabbtn'}}">
+                <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+                <view class="app-list-box tabbtn_view_box ">
+                    <view class="item_cell_box tabbtn_view_box_in" style="background:{{item.params.bgcolor}};font-size:{{item.params.fontsize}}px;color:{{item.params.color}};padding:{{item.params.padding}}px {{item.params.paddingv}}px">
+                        <view bindtap="getTab" class="tabbtn_viewitem" data-id="{{oi}}" data-iid="{{inkey}}" data-iiid="{{inn.id}}" s-for="{{item.params.data}}" s-for-index="inkey" s-for-item="inn">
+                            <text class="tabbtn_view_in" style="padding:0 {{item.params.fontp}}px;padding-bottom:{{item.params.fontpv}}px;border-bottom:{{!item.params.actaid&&inkey==0||item.params.actaid==inn.id?'1px solid '+item.params.actcolor:'0'}};color:{{!item.params.actaid&&inkey==0||item.params.actaid==inn.id?item.params.actcolor:item.params.color}}">{{inn.name}}</text>
+                        </view>
+                    </view>
+                    <view style="padding:{{item.params.textp}}px;padding:{{item.params.cpadding}}px {{item.params.cpaddingv}}px;background:{{item.params.cbgcolor}};margin-top:{{item.params.margintop}}px;" s-if="{{!item.params.actaid&&inkey==0||item.params.actaid==inn.id}}" s-for="{{item.params.data}}" s-for-index="inkey" s-for-item="inn">
+                        <template is="bdParse" data="{{bdParseData:inn.node.nodes}}"></template>
+                    </view>
+                </view>
+            </block>
+            <view class="temp_item temp_item_space" style="padding:{{item.params.padding}}px;background:{{item.params.bgcolor}}" s-if="{{item.name=='audio'}}">
+                <view class="item_cell_box temp_audio_box">
+                    <view class="temp_audio_thumb">
+                        <image src="{{item.params.thumb?item.params.thumb:'/images/au.png'}}"></image>
+                    </view>
+                    <view class="temp_audio_name item_cell_flex">
+                        <view class="temp_audio_namen" style="color:{{item.params.ncolor}}" s-if="{{item.params.name}}">{{item.params.name}}</view>
+                        <view style="color:{{item.params.dcolor}}" s-if="{{item.params.desc}}">{{item.params.desc}}</view>
+                    </view>
+                    <view bindtap="playaudio" class="temp_audio_btn" data-id="{{item.id}}" data-url="{{item.params.url}}">
+                        <image src="{{playaudioid==item.id&&playaudioing?'/images/v2.png':'/images/v.png'}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="fimg_box " s-if="{{page.basic.fimg&&page.basic.isf&&showfimg}}">
+            <view catchtouchmove="false" class="mask"></view>
+            <view class="fimg_box_in {{fimgpos?'toptobot':'bottotop'}}">
+                <button catchtap="{{page.basic.ftype=='tel'?'callphone':page.basic.ftype=='map'?'location':page.basic.ftype=='other'?'otherapp':page.basic.ftype=='url'||!page.basic.ftype?'navigateto':page.basic.ftype=='weburl'?'toweburl':page.basic.ftype=='images'?'showimages':page.basic.ftype=='scan'?'scan':page.basic.type?page.basic.type:''}}" data-addname="{{page.basic.faddname}}" data-address="{{page.basic.faddress}}" data-appid="{{page.basic.fappid}}" data-appurl="{{page.basic.fappurl}}" data-img="{{page.basic.fimagesdata}}" data-lat="{{page.basic.flat}}" data-lng="{{page.basic.flng}}" data-tel="{{page.basic.ftel}}" data-text="{{page.basic.text}}" data-url="{{page.basic.furl}}" data-weburl="{{page.basic.fweburl}}" openType="{{page.basic.ftype=='kefu'?'contact':page.basic.ftype=='share'?'share':''}}" sessionFrom="{{page.basic.sfrom}}">
+                    <image mode="widthFix" src="{{page.basic.fimg}}" style=""></image>
+                </button>
+                <view bindtap="changefimg" catchtouchmove="false" class="fimg_box_close">×</view>
+            </view>
+        </view>
+        <include src="/zxbddiy_sitetemp/pages/common/search.swan" s-if="{{page.data[0].name!='webview'}}"></include>
+        <include src="/zxbddiy_sitetemp/pages/common/copyright.swan" s-if="{{page.data[0].name!='webview'}}"></include>
+        <include src="/zxbddiy_sitetemp/pages/common/searchart.swan" s-if="{{page.data[0].name!='webview'}}"></include>
+        <view class="view_player" s-if="{{showvediobox}}">
+            <view bindtap="hidevideo" catchtouchmove="true" class="mask"></view>
+            <view class="video_play_box">
+                <video controls autoplay="{{false}}" id="video_play" objectFit="contain" src="{{actvideourl}}"></video>
+            </view>
+        </view>
+        <view bindtap="replaybg" class="bg_audio" s-if="{{page.basic.isaudio==1&&page.basic.showaudiobtn==1}}">
+            <image class="{{audioplaying?'music-btn-ani':''}}" src="/images/music_btn.png"></image>
+        </view>
+    </view>
+</block>
+<include src="/zxbddiy_sitetemp/pages/common/auth.swan"></include>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan" s-if="{{page.data[0].name!='webview'}}"></include>

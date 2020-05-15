@@ -1,0 +1,64 @@
+<import src="../../resource/zan-ui/quantity/index.swan"></import>
+<view>
+    <view class="page">
+        <view class="cart_goods" s-if="{{cartarr.length>0}}">
+            <view class="cart_goods_item item_cell_box" s-for="{{cartarr}}">
+                <view class="cart_goods_l" s-if="{{!item.fail}}">
+                    <label catchtap="checkitem" class="radio item_cell_box" data-id="{{item.id}}">
+                        <radio checked="{{item.checked||checkall}}" color="{{bar.maincolor?bar.maincolor:'#ed414a'}}" value=""></radio>
+                    </label>
+                </view>
+                <view class="cart_fail" s-if="{{item.fail}}">
+					已失效
+				</view>
+                <view catchtap="togood" class="cart_goods_img" data-url="{{item.url}}">
+                    <image mode="widthFix" src="{{item.thumb}}"></image>
+                </view>
+                <view catchtap="togood" class="cart_goods_r item_cell_flex" data-url="{{item.url}}" s-if="{{!iseditcart}}">
+                    <view class="cart_title">{{item.title}}</view>
+                    <view class="cart_rule">{{item.rulename}}</view>
+                    <view class="cart_bot item_cell_box" s-if="{{!item.fail}}">
+                        <view class="item_cell_flex">
+                            <text class="cart_price" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">￥{{item.price}}</text>
+                            <text class="cart_oldprice">￥{{item.oldprice}}</text>
+                        </view>
+                        <view class="cart_num">x{{item.quantity.quantity}}</view>
+                    </view>
+                </view>
+                <view class="cart_goods_edit item_cell_box item_cell_flex" s-if="{{iseditcart}}">
+                    <view class="item_cell_flex">
+                        <template is="zan-quantity" data="{{{...item.quantity,componentId:'cartarr['+index+'].quantity',size:'small'}}}" s-if="{{!item.fail}}"></template>
+                    </view>
+                    <view catchtap="deleteitem" class="cart_goods_delete" data-id="{{item.id}}" style="background-color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">删除</view>
+                </view>
+            </view>
+        </view>
+        <view class="cart_empty" s-if="{{cartarr.length<=0}}">
+			购物车是空的
+		</view>
+        <view class="footer_box cart_footer" style="bottom:{{bottom}}px" s-if="{{cartarr.length>0}}">
+            <view class="item_cell_box">
+                <view bindtap="checkall" class="cart_item" s-if="{{!iseditcart}}">
+                    <label class="radio item_cell_box">
+                        <radio checked="{{allchecked}}" color="{{bar.maincolor?bar.maincolor:'#ed414a'}}" value=""></radio>
+                        <view class="item_cell_flex se_all">全选</view>
+                    </label>
+                </view>
+                <view bindtap="deleteall" class="cart_item" s-if="{{iseditcart}}">
+                    <text class="cart_deleteall" style="border: 1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}};color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">清空</text>
+                </view>
+                <view class="cart_item cart_foot_money item_cell_flex">
+                    <view>合计：<text class="money_icon" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">￥</text>
+                        <text class="money_total" style="color:{{bar.maincolor?bar.maincolor:'#ed414a'}}">{{allmoney}}</text>
+                    </view>
+                    <view class="cart_item_notice">未计运费</view>
+                </view>
+                <view bindtap="editcart" class="cart_edit cart_item">{{iseditcart?'完成':'编辑'}}</view>
+                <view bindtap="buy" class="cart_item" data-type="buy" style="background-color:{{bar.maincolor?bar.maincolor:'#ed414a'}}!important">
+					结算({{allnum}})
+				</view>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

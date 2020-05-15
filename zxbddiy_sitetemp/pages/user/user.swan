@@ -1,0 +1,64 @@
+<view class="page user_page" s-if="{{order}}">
+    <view class="user_top">
+        <view class="user_top_bg" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}"></view>
+        <view class="user_top_info">
+            <view class="user_top_userinfo item_cell_box">
+                <image mode="" src="{{wxuser.headimgurl?wxuser.headimgurl:wxuser.avatar}}"></image>
+                <view class="user_top_nick">{{wxuser.nickname}}</view>
+            </view>
+            <view class="user_top_order item_cell_box">
+                <view bindtap="toorder" class="user_order_item" data-type="0">
+                    <view class="order_item_icon">
+                        <image mode="widthFix" src="../../../images/foundation_img_me_icon_order1_.png"></image>
+                        <view class="zan-badge__count" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{order.ordering}}</view>
+                    </view>
+                    <view class="order_item_name">待付款</view>
+                </view>
+                <view bindtap="toorder" class="user_order_item" data-type="1">
+                    <view class="order_item_icon">
+                        <view class="zan-badge__count" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{order.orderpayed}}</view>
+                        <image mode="widthFix" src="../../../images/foundation_img_me_icon_order2_.png"></image>
+                    </view>
+                    <view class="order_item_name">{{lawyer==1?'待履行':'待发货'}}</view>
+                </view>
+                <view bindtap="toorder" class="user_order_item" data-type="2">
+                    <view class="order_item_icon">
+                        <view class="zan-badge__count" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{order.ordersend}}</view>
+                        <image mode="widthFix" src="../../../images/foundation_img_me_icon_order3_.png"></image>
+                    </view>
+                    <view class="order_item_name">{{lawyer==1?'正在履行':'已发货'}}</view>
+                </view>
+                <view bindtap="toorder" class="user_order_item" data-type="3">
+                    <view class="order_item_icon">
+                        <view class="zan-badge__count" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{order.ordercom}}</view>
+                        <image mode="widthFix" src="../../../images/foundation_img_me_icon_order4_.png"></image>
+                    </view>
+                    <view class="order_item_name">已完成</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-panel user_list">
+        <view bindtap="toaddress" class="zan-cell zan-cell--access">
+            <view class="zan-cell__bd">我的地址</view>
+            <view class="zan-cell__ft"></view>
+        </view>
+        <view bindtap="navigateto" class="zan-cell zan-cell--access" data-url="/zxbddiy_sitetemp/pages/card/mycard">
+            <view class="zan-cell__bd">我的卡券</view>
+            <view class="zan-cell__ft"></view>
+        </view>
+        <button bindtap="{{sets.kefutype==1?'callphone':sets.kefutype==3?'weburl':sets.kefutype==4?'showkefuimg':''}}" class="zan-cell zan-cell--access click_button" data-img="{{sets.kefuimg}}" data-tel="{{sets.kefutel}}" data-url="{{sets.kefuurl}}" hoverClass="none" openType="{{sets.kefutype==2?'contact':''}}" s-if="{{sets.kefutype>0}}">
+            <view class="zan-cell__bd">联系客服</view>
+            <view class="zan-cell__ft"></view>
+        </button>
+    </view>
+    <view class="zan-panel user_list" s-if="{{isadmin}}">
+        <view bindtap="navigateto" class="zan-cell zan-cell--access" data-url="/zxbddiy_sitetemp/pages/adminshop/orderlist?tid={{tid}}">
+            <view class="zan-cell__bd">订单管理</view>
+            <view class="zan-cell__ft">管理员</view>
+        </view>
+    </view>
+    <include src="/zxbddiy_sitetemp/pages/common/copyright.swan"></include>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/auth.swan"></include>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

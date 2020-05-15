@@ -1,0 +1,87 @@
+page {
+    background: #eee;
+    height: 100vh;
+}
+
+.user_top {
+    height: 500rpx;
+    position: relative;
+}
+
+.user_top_bg {
+    background: #ed414a;
+    height: 250rpx;
+}
+
+.user_top_info {
+    position: absolute;
+    top: 50rpx;
+    background: #fff;
+    width: 710rpx;
+    left: 20rpx;
+    border-radius: 10rpx;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.user_top_userinfo {
+    padding: 40rpx;
+    align-items: center;
+}
+
+.user_top_userinfo image {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+}
+
+.user_top_nick {
+    font-size: 36rpx;
+    color: #333;
+    font-weight: 400;
+    padding-left: 10rpx;
+}
+
+.user_order_item {
+    width: 25%;
+    position: relative;
+}
+
+.order_item_icon {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.order_item_icon image {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.order_item_name {
+    color: #666;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.user_top_order {
+    padding: 40rpx 0;
+}
+
+.user_list .zan-cell {
+    padding: 30rpx 20rpx;
+}
+
+.zan-cell::after {
+    left: 20rpx;
+    right: 20rpx;
+}
+
+button.zan-cell {
+    padding: 30rpx 20rpx!important;
+    display: flex!important;
+    align-items: center!important;
+    line-height: 1.4!important;
+    font-size: 14px!important;
+}

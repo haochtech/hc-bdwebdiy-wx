@@ -1,0 +1,15 @@
+<view class="temp_nav mt10" s-if="{{tasksort.length>0}}">
+    <swiper autoplay="{{false}}" bindchange="sortNavChange" duration="500" indicatorDots="{{false}}" style="height:{{sortNavHeight}}">
+        <swiper-item s-for="{{tasksort}}" s-for-item="i">
+            <view class="item_cell_box temp_nav_box">
+                <view class="temp_nav_item" s-for="{{i}}" s-for-item="j">
+                    <image src="{{j.img}}"></image>
+                    <view class="temp_nav_name">{{j.name}}</view>
+                </view>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class="tamp_nav_pointer">
+        <text class="tamp_nav_pointeritem {{navindex==index?'tamp_nav_actpointe':''}}" s-for="{{tasksort}}"></text>
+    </view>
+</view>

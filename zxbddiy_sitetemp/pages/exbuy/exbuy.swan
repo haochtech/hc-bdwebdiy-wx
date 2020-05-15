@@ -1,0 +1,150 @@
+<view class="exbuy_page" s-if="{{allsort}}">
+    <view class="exbuy_top">
+        <view class="exbuy_top_head item_cell_box" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{isshowtop}}">
+            <view class="exbuy_top_headimg">
+                <image src="{{sets.shophead}}"></image>
+            </view>
+            <view class="head_r item_cell_flex" s-if="{{deskid<=0}}">
+                <view>起送￥{{sets.leastmoney}} | {{sets.sendmoney>0?'配送费￥'+sets.sendmoney:'免配送费'}} | {{sets.sendtime}}分钟送达</view>
+                <view s-if="{{sets.freesend>0}}">满￥{{sets.freesend}}免配送费</view>
+            </view>
+            <view class="head_r item_cell_flex head_shopname" s-if="{{deskid>0}}">
+                <view>{{sets.shopname}}</view>
+                <view s-if="{{desk}}">{{desk.name}}</view>
+            </view>
+        </view>
+        <view class="item_cell_box exbuy_top_btn">
+            <view bindtap="changehead" class="exbuy_btn_item" data-type="goods">
+                <text class="{{headtype=='goods'?'exbuy_actbtn':''}}" style="{{headtype=='goods'?'border-bottom:2px solid '+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">商品</text>
+            </view>
+            <view bindtap="changehead" class="exbuy_btn_item" data-type="shop">
+                <text class="{{headtype=='shop'?'exbuy_actbtn':''}}" style="{{headtype=='shop'?'border-bottom:2px solid '+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">商家</text>
+            </view>
+        </view>
+    </view>
+    <view class="item_cell_box gsort_bot" style="top:{{isshowtop?'275rpx':'100rpx'}}" s-if="{{headtype=='goods'}}">
+        <scroll-view scrollY class="gsort_l" scrollIntoView="{{toViewl}}" scrollTop="{{lTop}}" scrollWithAnimation="true" style="height:{{bheight.rd?bheight.rd+'px':'100%'}}">
+            <view bindtap="changeSort" class="gsort_l_item {{index==0&&actsort==0||item.id==actsort?'gsort_l_act':''}}" data-id="{{item.id}}" id="gsort_l_item{{item.id}}" style="color:{{index==0&&actsort==0||item.id==actsort?bar.maincolor?bar.maincolor:'#ed414a':''}}" s-for="{{allsort}}">
+				{{item.name}}
+			</view>
+            <view class="gsort_l_bot"></view>
+        </scroll-view>
+        <scroll-view scrollY bindscroll="scrollR" class="gsort_r" scrollIntoView="{{toView}}" scrollWithAnimation="true" style="height:{{bheight.rd?bheight.rd+'px':'100%'}}">
+            <block s-for="{{allsort}}">
+            <view class="gsort_r_item " data-id="{{item.id}}" id="gsort_r_item{{item.id}}" s-if="{{item.good.length>0}}" >
+                <view class="gsort_item_title" data-name="{{item.name}}" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">{{item.name}}</view>
+                <view class="gsort_item_box">
+                    <view class="gsort_item item_cell_box" data-id="{{in.id}}" s-for="{{item.good}}" s-for-item="in">
+                        <view bindtap="navigateto" class="gsort_item_l" data-url="{{in.url}}">
+                            <image lazyLoad="true" src="{{in.thumb}}"></image>
+                        </view>
+                        <view class="gsort_item_r item_cell_flex">
+                            <view class="gsort_name">{{in.title}}</view>
+                            <view class="gsort_desc" s-if="{{in.desc}}">{{in.desc}}</view>
+                            <view class="gsort_sales" s-if="{{in.sales>0}}">已售{{in.sales}}</view>
+                            <view class="item_cell_box gsort_data">
+                                <view class="item_cell_flex gsort_price" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">￥ <text>{{in.price}}</text>
+                                </view>
+                                <view style="display:flex;align-items: center;" s-if="{{in.isrule==0}}">
+                                    <text bindtap="addgoods" class="change_item change_btn minus" data-gid="{{in.id}}" data-sid="{{item.id}}" data-type="minus" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{in.buynum>0}}">－</text>
+                                    <input bindchange="inputnum" class="inputnum" data-gid="{{in.id}}" data-sid="{{item.id}}" focus="{{false}}" type="number" value="{{in.buynum}}" s-if="{{in.buynum>0}}" />
+                                    <text bindtap="addgoods" class="change_item change_btn add {{in.buynum>=in.stock?'change_btn_disabled':''}}" data-gid="{{in.id}}" data-sid="{{item.id}}" data-type="add" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}};border:1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}};">＋</text>
+                                </view>
+                                <view class="gsort_sbtn" s-if="{{in.isrule==1}}">
+                                    <text bindtap="showrule" data-gid="{{in.id}}" data-sid="{{item.id}}" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">选择</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            </block>
+            <view class="gsort_l_bot"></view>
+        </scroll-view>
+    </view>
+    <view class="gsort_bot shop_info" style="top:{{isshowtop?'275rpx':'100rpx'}}" s-if="{{headtype=='shop'}}">
+        <view class="zan-cell zan-cell--access" s-if="{{sets.shopname}}">
+            <view class="zan-cell__icon zan-icon zan-icon-points-mall" style="color:#999;"></view>
+            <view class="zan-cell__bd">{{sets.shopname}}</view>
+        </view>
+        <view bindtap="location" class="zan-cell zan-cell--access" data-lat="{{sets.shoplat}}" data-lng="{{sets.shoplng}}" s-if="{{sets.shopaddress}}">
+            <view class="zan-cell__icon zan-icon zan-icon-location" style="color:#999;"></view>
+            <view class="zan-cell__bd">{{sets.shopaddress}}</view>
+            <view class="zan-cell__ft"></view>
+        </view>
+        <view bindtap="callphone" class="zan-cell zan-cell--access" data-tel="{{sets.shoptel}}" s-if="{{sets.shoptel}}">
+            <view class="zan-cell__icon zan-icon zan-icon-phone" style="color:#999;"></view>
+            <view class="zan-cell__bd">{{sets.shoptel}}</view>
+            <view class="zan-cell__ft"></view>
+        </view>
+        <view class="zan-cell zan-cell--access shoppic" s-if="{{sets.shoppic}}">
+            <image bindtap="showshoppic" data-index="{{index}}" src="{{item}}" s-for="{{sets.shoppic}}"></image>
+        </view>
+    </view>
+</view>
+<view class="rule_box" s-if="{{isrule}}">
+    <view bindtap="hiderule" class="mask"></view>
+    <view class="rule_in">
+        <view class="rule_top item_cell_box">
+            <view class="rule_top_title item_cell_flex">{{actgood.title}}</view>
+            <view bindtap="hiderule" class="rule_top_close">×</view>
+        </view>
+        <view class="rule_in_item ">
+            <view class="item_cell_box" s-for="{{actgood.rulearray.rule}}">
+                <view class="rule_name">{{item.pro.title}}</view>
+                <view class="rule_list">
+                    <view bindtap="changeRule" class="rule_item {{item.actitem==in.id?'actitem':''}}" data-id="{{item.pro.id}}" data-inid="{{in.id}}" style="background-color:{{item.actitem==in.id?bar.maincolor?bar.maincolor:'#ed414a':''}}" s-for="{{item.data}}" s-for-item="in">{{in.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="rule_bot item_cell_box">
+            <view class="rule_pruce item_cell_flex" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">￥ <text>{{actrule?actrule.nowprice:actgood.price}}</text>
+            </view>
+            <view class="rule_btn " s-if="{{actrule}}">
+                <text bindtap="addgoodsbyrule" class="change_item change_btn minus" data-type="minus" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{actrule.buynum>0}}">－</text>
+                <input bindchange="inputrulenum" class="inputnum" focus="false" type="number" value="{{actrule.buynum}}" />
+                <text bindtap="addgoodsbyrule" class="change_item change_btn add {{actrule.buynum>=actrule.stock?'change_btn_disabled':''}}" data-type="add" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}};border:1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}};">＋</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cartbox zan-dialog {{showcartbox?'zan-dialog--show':''}}">
+    <view bindtap="togglecart" class="zan-dialog__mask 1"></view>
+    <view class="zan-dialog__container">
+        <view class="cartbox_in">
+            <view class="cartbox_item item_cell_box" s-for="{{cart}}">
+                <view class="item_cell_flex cartbox_name">
+                    <view class="cartbox_title">{{item.title}}</view>
+                    <view class="cartbox_title cartbox_rule" s-if="{{item.rulename}}">{{item.rulename}}</view>
+                </view>
+                <view class="cartbox_item_price" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">￥ <text>{{item.price*item.buynum}}</text>
+                </view>
+                <view class="cartbox_item_btn">
+                    <text bindtap="addgoodsbycart" class="change_item change_btn minus" data-cid="{{item.cid}}" data-type="minus" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">－</text>
+                    <input bindchange="inputnumcart" class="inputnum" data-cid="{{item.cid}}" focus="false" type="number" value="{{item.buynum}}" />
+                    <text bindtap="addgoodsbycart" class="change_item change_btn add {{item.buynum>=item.stock?'change_btn_disabled':''}}" data-cid="{{item.cid}}" data-type="add" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}};border:1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}};">＋</text>
+                </view>
+            </view>
+        </view>
+        <view class=" cartbox_bot"></view>
+    </view>
+</view>
+<view class="footer_box exbuy_footer" s-if="{{allsort&&headtype=='goods'&&cart.length>0}}">
+    <view class="item_cell_box exbuy_footer_in">
+        <view class="footer_item footer_l">
+            <view s-if="{{cart.length<=0}}">请添加商品</view>
+            <view bindtap="togglecart" class="cart_box" s-if="{{cart.length>0}}">
+                <view class="cart_num">
+                    <view class="zan-icon zan-icon-shopping-cart {{anima?'anima':''}}">
+                        <view class="zan-badge__count" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}};border:1px solid {{bar.maincolor?bar.maincolor:'#ed414a'}};">{{cartdata.num}}</view>
+                    </view>
+                </view>
+                <view class="cart_total">共￥<text>{{cartdata.total}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="footer_item footer_r" s-if="{{(cartdata.total*1<sets.leastmoney*1||cart.length==0)&&!deskid}}">{{sets.leastmoney*100/100}}元起送</view>
+        <view bindtap="payit" class="footer_item footer_r prepay" s-if="{{(cartdata.total*1>=sets.leastmoney*1||deskid)&&cart.length>0}}">选好了</view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan" s-if="{{cart.length==0}}"></include>

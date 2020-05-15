@@ -1,0 +1,173 @@
+.page {
+    padding-bottom: 150rpx;
+}
+
+.zan-steps__icons {
+    background-color: rgba(255,255,255,0)!important;
+}
+
+.orderinfo_bg {
+    background: #ed414a;
+    padding: 40rpx 20rpx;
+    color: #fff;
+}
+
+.zan-steps--steps .zan-steps__step--done {
+    color: #fff;
+}
+
+.zan-steps--steps .zan-steps__step {
+    color: #fff;
+}
+
+.orderinfo_bg2 {
+    background: #ed414a;
+    color: #fff;
+    padding: 60rpx 20rpx;
+}
+
+.orderlist_goods_title {
+    min-height: 80rpx;
+}
+
+.orderinfo_goods {
+    padding: 20rpx;
+    background: #fff;
+}
+
+.orderlist_mid_item {
+    background: #f1f1f1;
+    padding: 10rpx;
+    border-bottom: 1px solid #fff;
+}
+
+.orderinfo_data {
+    background: #fff;
+    padding: 20rpx;
+    font-size: 28rpx;
+}
+
+.data_item {
+    padding: 5rpx 0;
+    color: #666;
+}
+
+.data_total {
+    padding: 20rpx 0;
+    border-top: 1px solid #eee;
+    color: #333;
+}
+
+.data_total .total_money {
+    color: #ed414a;
+    font-size: 32rpx;
+}
+
+.orderinfo_log {
+    padding: 20rpx;
+    background: #fff;
+    font-size: 28rpx;
+}
+
+.log_item {
+    padding: 5rpx 0;
+}
+
+.log_item_l {
+    width: 280rpx;
+    padding-right: 20rpx;
+}
+
+.bot_btn {
+    padding: 5rpx 20rpx!important;
+    border: 1px solid #ddd!important;
+    border-radius: 5rpx!important;
+    margin-right: 20rpx!important;
+    color: #666!important;
+    font-size: 28rpx!important;
+}
+
+.order_foot {
+    padding: 20rpx 0;
+}
+
+.orderinfo_address {
+    align-items: center;
+    background: #fff;
+    padding: 10rpx;
+}
+
+.orderinfo_address .item_cell_flex {
+    padding-left: 20rpx;
+}
+
+.orderinfo_tel,.orderinfo_add {
+    font-size: 28rpx;
+    color: #999;
+}
+
+.orderinfo_tel {
+    padding-left: 20rpx;
+}
+
+.orderinfo_shop {
+    background: #fff;
+    padding: 20rpx;
+    align-items: center;
+    font-size: 28rpx;
+}
+
+.orderinfo_shop_r {
+    padding-left: 20rpx;
+}
+
+.orderinfo_shop_btn {
+    display: inline-block;
+}
+
+.orderinfo_shopbtn_item {
+    width: 50%;
+}
+
+.orderinfo_mess {
+    background: #fff;
+    font-size: 28rpx;
+    padding: 20rpx;
+    color: #333;
+}
+
+.mess_content {
+    padding-left: 10rpx;
+}
+
+.orderinfo_qr {
+    margin-top: 10rpx;
+}
+
+.orderinfo_qr_r {
+    width: 300rpx;
+    padding-left: 20rpx;
+}
+
+.orderinfo_qr_r image {
+    width: 300rpx;
+    height: 300rpx;
+}
+
+.orderinfo_shop_tip {
+    color: #666;
+    font-size: 26rpx;
+}
+
+.zan-steps {
+    overflow: hidden;
+}
+
+.zan-steps__title {
+    font-size: 30rpx!important;
+}
+
+.orderinfo_goods_rule {
+    font-size: 28rpx;
+    line-height: 32rpx;
+}

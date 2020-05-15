@@ -1,0 +1,110 @@
+page {
+    background: #fff;
+    height: 100vh;
+}
+
+.gsort_top {
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 20rpx 0;
+}
+
+.gsort_top_box {
+    background: #eee;
+    border: 1px solid #eee;
+    color: #999;
+    border-radius: 70rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    padding-left: 20rpx;
+    margin: 0 20rpx;
+}
+
+.top_search_icon {
+    padding-left: 20rpx;
+    font-size: 28rpx;
+}
+
+.gsort_l {
+    background: #eee;
+    height: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    color: #666666;
+    width: 200rpx;
+}
+
+.gsort_bot {
+    height: 100vh;
+    position: fixed;
+    top: 100rpx;
+    left: 0;
+    width: 100%;
+    background: #fff;
+}
+
+.gsort_l_item {
+    padding: 30rpx 0;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 30rpx 10rpx;
+}
+
+.gsort_r {
+    width: 550rpx;
+    height: 100%;
+}
+
+.gsort_l_bot {
+    height: 200rpx;
+}
+
+.gsort_l_act {
+    background: #fff;
+    color: #ed414a;
+    border-left: 2px solid #ed414a;
+}
+
+.gsort_item_in {
+    width: 33.3%;
+    float: left;
+    text-align: center;
+    margin-bottom: 20rpx;
+}
+
+.gsort_item_in image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.gsort_item_title {
+    text-align: center;
+    padding: 20rpx;
+    color: #666;
+    font-size: 28rpx;
+    overflow: hidden;
+}
+
+.gsort_item_name {
+    font-size: 26rpx;
+    color: #5d5d5d;
+    overflow: hidden;
+}
+
+.gsort_r_item {
+    overflow: hidden;
+    padding-bottom: 50rpx;
+}
+
+.sort_two {
+    margin-top: 150rpx;
+}
+
+.sort_two .gsort_item_in {
+    width: 25%;
+    margin-bottom: 40rpx;
+}

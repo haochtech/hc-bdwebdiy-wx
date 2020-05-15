@@ -1,0 +1,182 @@
+<import src="../../resource/zan-ui/steps/index.swan"></import>
+<view s-if="{{order}}">
+    <view class="page">
+        <block s-if="{{order.deskid<=0&&order.isprogress==0}}">
+            <view class="orderinfo_bg" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{order.status==1||order.status==2||order.status==3}}">
+                <view class="zan-cell__bd">
+                    <template is="zan-steps" data="{{type:'horizon',steps:steps}}"></template>
+                </view>
+            </view>
+            <view class="orderinfo_bg orderinfo_bg2" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{order.status==0||order.status==4}}">
+		    	{{order.status==0?order.paytype==0?'待支付':'待配送，待付款':'已退款'}}
+		    </view>
+        </block>
+        <view class="orderinfo_address item_cell_box" s-if="{{order.taketype==1&&order.deskid<=0}}">
+            <view class="zan-icon zan-icon-location"></view>
+            <view class="item_cell_flex">
+                <view>
+                    <text>{{order.address.name}}</text>
+                    <text class="orderinfo_tel">{{order.address.tel}}</text>
+                </view>
+                <view>
+                    <view class="orderinfo_add">
+	    				{{order.address.address}}
+	    			</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_shop" s-if="{{order.taketype==2&&order.status==1}}">
+            <view class="orderinfo_shop_t item_cell_box">
+                <view class="orderinfo_shop_l">自提门店</view>
+                <view class="item_cell_flex orderinfo_shop_r">
+                    <view>{{sets.shopname}} <text class="orderinfo_tel">{{sets.shoptel}}</text>
+                    </view>
+                    <view class="orderinfo_add">{{sets.shopaddress}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_shop mt20" s-if="{{order.deskid>0}}">
+            <view class="orderinfo_shop_t item_cell_box">
+                <view class="orderinfo_shop_l">餐桌名称</view>
+                <view class="item_cell_flex orderinfo_shop_r">
+                    <view>{{order.desk.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_goods mt20">
+            <view class="zan-card orderlist_mid_item" data-url="{{in.url}}" s-for="{{order.list}}" s-for-item="in">
+                <view class="zan-card__thumb">
+                    <image class="zan-card__img" mode="aspectFit" src="{{in.thumb}}"></image>
+                </view>
+                <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                        <view class="zan-card__right-col">¥ {{in.money}}</view>
+                        <view class="zan-card__left-col zan-ellipsis--l2 orderlist_goods_title">
+			             	{{in.title}}
+			          	</view>
+                    </view>
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                        <view class="zan-card__right-col">x{{in.num}}</view>
+                        <view class="zan-card__left-col orderinfo_goods_rule">
+			            	{{in.rulename}}
+			          	</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20">
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">订单编号</view>
+                <view>{{order.id}}</view>
+            </view>
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">支付方式</view>
+                <view>{{order.paytype==0?'在线支付':order.deskid>0?'餐后付款':'货到付款'}}</view>
+            </view>
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">商品数量</view>
+                <view>{{order.num}}</view>
+            </view>
+            <view class="data_item item_cell_box" s-if="{{order.type==0}}">
+                <view class="item_cell_flex">总计运费</view>
+                <view>¥ {{order.express}}</view>
+            </view>
+            <view class="data_item item_cell_box" s-if="{{order.type==1}}">
+                <view class="item_cell_flex">配送费用</view>
+                <view>{{order.sendmoney>0?'¥ '+order.sendmoney:'免配送费'}}</view>
+            </view>
+            <view class="data_item data_total item_cell_box">
+                <view class="item_cell_flex">订单总价</view>
+                <view class="total_money" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">¥ {{order.fee}}</view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20" s-if="{{order.formdata.length>0}}">
+            <view class="data_item formdata_item item_cell_box" s-for="{{order.formdata}}">
+                <view class="formdata_l">{{item.name}}</view>
+                <view class="item_cell_flex formdata_r" s-if="{{item.isarray==1}}">
+                    <text s-for="{{item.value}}" s-for-item="in">{{in}} </text>
+                </view>
+                <view class="item_cell_flex formdata_r" s-else>{{item.value}}</view>
+            </view>
+        </view>
+        <view class="mt20 orderinfo_mess item_cell_box" s-if="{{order.tel}}">
+            <view class="mess_title">联系电话</view>
+            <view bindtap="callphone" class="item_cell_flex mess_content" data-tel="{{order.tel}}">{{order.tel}}</view>
+        </view>
+        <view class="mt20 orderinfo_mess item_cell_box" s-if="{{order.mess}}">
+            <view class="mess_title">备注内容</view>
+            <view class="item_cell_flex mess_content">{{order.mess}}</view>
+        </view>
+        <view class="mt20 orderinfo_log" s-if="{{order.log&&order.isprogress==0}}">
+            <view class="log_item item_cell_box" s-for="{{order.log}}">
+                <view class="log_item_l">{{item.t}}</view>
+                <view class="item_cell_flex">{{item.s}}</view>
+            </view>
+        </view>
+        <view class="mt20 orderinfo_log" s-if="{{order.isprogress==1}}">
+            <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:verlogs,fn:'deletevstep'}}"></template>
+        </view>
+    </view>
+    <view class="footer_box">
+        <view class="item_cell_box order_foot">
+            <view class="item_cell_flex"></view>
+            <button bindtap="callphone" class="bot_btn click_button" data-tel="{{order.tel?order.tel:order.address.tel}}" hoverClass="none" s-if="{{order.tel||order.address.tel}}">联系买家</button>
+            <view bindtap="dealorder" class="bot_btn" data-type="cancel" s-if="{{order.status==0}}">删除</view>
+            <view bindtap="dealorder" class="bot_btn" data-id="{{order.orderid}}" data-type="refund" s-if="{{(order.status==1||order.status==2)&&order.paytype==0}}">退款</view>
+            <view bindtap="dealorder" class="bot_btn" data-id="{{item.orderid}}" data-type="send" s-if="{{order.status==1&&order.paytype==0&&order.taketype==1}}">发货</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="express" s-if="{{order.status>=2&&order.taketype==1&&order.expressname}}">查看物流</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="com" s-if="{{order.status==0&&order.paytype==1||order.status==2&&order.paytype==0||order.status==1&&order.taketype==2}}">完成</view>
+            <view bindtap="addpro" class="bot_btn">{{order.isprogress==0?'自定义进度':'添加进度'}}</view>
+        </view>
+    </view>
+    <view class="zan-dialog {{showexpress?'zan-dialog--show':''}}">
+        <view bindtap="toggleexpress" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container">
+            <view class="icon_box">
+                <view class="express_head">填写快递信息</view>
+                <view class="express_item item_cell_box ">
+                    <view class="express_l">快递名称</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <input bindinput="expressname" name="name" type="text" value="" />
+                    </view>
+                </view>
+                <view class="express_item item_cell_box">
+                    <view class="express_l">快递编号</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <input bindinput="expressnum" name="num" type="tel" value="" />
+                    </view>
+                </view>
+                <view class="tips">提示：无快递信息可不填写直接提交。</view>
+                <view bindtap="subexpress" class="my_btn express_btn">提交</view>
+            </view>
+        </view>
+    </view>
+    <view class="zan-dialog {{showaddpro?'zan-dialog--show':''}}">
+        <view bindtap="addpro" class="zan-dialog__mask"></view>
+        <view class="zan-dialog__container">
+            <view class="icon_box">
+                <view class="express_head">添加订单进度</view>
+                <view class="express_item item_cell_box">
+                    <view class="express_l">进度名称</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <input bindinput="proname" name="num" type="tel" value="" />
+                    </view>
+                </view>
+                <view class="express_item item_cell_box ">
+                    <view class="express_l">进度时间</view>
+                    <view class="icon_item_r item_cell_flex express_r">
+                        <view class="item_cell_box">
+                            <picker bindchange="bindDateChange" class="pro_d pro_date" end="3017-09-01" mode="date" start="1-09-01" value="{{prodate}}">
+						    	{{prodate}}
+						  	</picker>
+                            <picker bindchange="bindTimeChange" class="pro_d pro_time" end="24:00" mode="time" start="00:00" value="{{protime}}">
+						    	{{protime}}
+						  	</picker>
+                        </view>
+                    </view>
+                </view>
+                <view bindtap="subaddpro" class="my_btn express_btn">提交</view>
+            </view>
+        </view>
+    </view>
+</view>

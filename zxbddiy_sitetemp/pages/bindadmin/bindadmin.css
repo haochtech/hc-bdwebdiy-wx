@@ -1,0 +1,26 @@
+.admin_box {
+    padding: 20rpx;
+}
+
+.admin_box {
+    margin-top: 20%;
+    text-align: center;
+}
+
+.admin_headimg {
+    width: 260rpx;
+    height: 260rpx;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+.admin_nickname {
+    color: #09345F;
+    font-size: 45rpx;
+    font-weight: 500;
+    margin-top: 50rpx;
+}
+
+.admin_btn {
+    margin-top: 100rpx;
+}

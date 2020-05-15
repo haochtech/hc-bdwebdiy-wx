@@ -1,0 +1,147 @@
+<import src="../../resource/zan-ui/steps/index.swan"></import>
+<view s-if="{{order}}">
+    <view class="page">
+        <block s-if="{{order.deskid<=0&&order.isprogress==0}}">
+            <view class="orderinfo_bg" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{order.status==1||order.status==2||order.status==3}}">
+                <view class="zan-cell__bd">
+                    <template is="zan-steps" data="{{type:'horizon',steps:steps}}"></template>
+                </view>
+            </view>
+            <view class="orderinfo_bg orderinfo_bg2" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{order.status==0||order.status==4}}">
+		    	{{order.status==0?order.paytype==0?'待支付':'待配送，待付款':'已退款'}}
+		    </view>
+        </block>
+        <view class="orderinfo_address item_cell_box" s-if="{{order.taketype==1&&order.deskid<=0}}">
+            <view class="zan-icon zan-icon-location"></view>
+            <view class="item_cell_flex">
+                <view>
+                    <text>{{order.address.name}}</text>
+                    <text class="orderinfo_tel">{{order.address.tel}}</text>
+                </view>
+                <view>
+                    <view class="orderinfo_add">
+	    				{{order.address.address}}
+	    			</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_shop" s-if="{{order.taketype==2&&order.status==1}}">
+            <view class="orderinfo_shop_t item_cell_box">
+                <view class="orderinfo_shop_l">自提门店</view>
+                <view class="item_cell_flex orderinfo_shop_r">
+                    <view>{{sets.shopname}} <text class="orderinfo_tel">{{sets.shoptel}}</text>
+                    </view>
+                    <view class="orderinfo_add">{{sets.shopaddress}}</view>
+                </view>
+            </view>
+            <view class="orderinfo_qr item_cell_box">
+                <view class="orderinfo_qr_l">兑取图码</view>
+                <view class="orderinfo_qr_r">
+                    <image mode="widthFix" src="{{qrcode}}"></image>
+                    <view class="orderinfo_shop_tip">提示:到门店后出示上方二维码兑取</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_shop mt20" s-if="{{order.deskid>0}}">
+            <view class="orderinfo_shop_t item_cell_box">
+                <view class="orderinfo_shop_l">餐桌名称</view>
+                <view class="item_cell_flex orderinfo_shop_r">
+                    <view>{{order.desk.name}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_goods mt20">
+            <view catchtap="goodinfo" class="zan-card orderlist_mid_item" data-url="{{in.url}}" s-for="{{order.list}}" s-for-item="in">
+                <view class="zan-card__thumb">
+                    <image class="zan-card__img" mode="aspectFit" src="{{in.thumb}}"></image>
+                </view>
+                <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+                        <view class="zan-card__right-col">¥ {{in.money}}</view>
+                        <view class="zan-card__left-col zan-ellipsis--l2 orderlist_goods_title">
+			             	{{in.title}}
+			          	</view>
+                    </view>
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+                        <view class="zan-card__right-col">x{{in.num}}</view>
+                        <view class="zan-card__left-col orderinfo_goods_rule">
+			            	{{in.rulename}}
+			          	</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20">
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">订单编号</view>
+                <view>{{order.id}}</view>
+            </view>
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">支付方式</view>
+                <view>{{order.paytype==0?'在线支付':order.deskid>0?'餐后付款':'货到付款'}}</view>
+            </view>
+            <view class="data_item item_cell_box">
+                <view class="item_cell_flex">商品数量</view>
+                <view>{{order.num}}</view>
+            </view>
+            <view class="data_item item_cell_box" s-if="{{order.type==0}}">
+                <view class="item_cell_flex">总计运费</view>
+                <view>¥ {{order.express}}</view>
+            </view>
+            <view class="data_item item_cell_box" s-if="{{order.type==1}}">
+                <view class="item_cell_flex">配送费用</view>
+                <view>{{order.sendmoney>0?'¥ '+order.sendmoney:'免配送费'}}</view>
+            </view>
+            <view class="data_item data_total item_cell_box">
+                <view class="item_cell_flex">订单总价</view>
+                <view class="total_money" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">¥ {{order.fee}}</view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20" s-if="{{order.formdata.length>0}}">
+            <view class="data_item formdata_item item_cell_box" s-for="{{order.formdata}}">
+                <view class="formdata_l">{{item.name}}</view>
+                <view class="item_cell_flex formdata_r" s-if="{{item.isarray==1}}">
+                    <text s-for="{{item.value}}" s-for-item="in">{{in}} </text>
+                </view>
+                <view class="item_cell_flex formdata_r" s-else>{{item.value}}</view>
+            </view>
+        </view>
+        <view class="mt20 orderinfo_mess item_cell_box" s-if="{{order.mess}}">
+            <view class="mess_title">备注内容</view>
+            <view class="item_cell_flex mess_content">{{order.mess}}</view>
+        </view>
+        <view class="mt20 orderinfo_log" s-if="{{order.log&&order.isprogress==0}}">
+            <view class="log_item item_cell_box" s-for="{{order.log}}">
+                <view class="log_item_l">{{item.t}}</view>
+                <view class="item_cell_flex">{{item.s}}</view>
+            </view>
+        </view>
+        <view class="mt20 orderinfo_log" s-if="{{order.isprogress==1}}">
+            <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:verlogs}}"></template>
+        </view>
+    </view>
+    <view class="zan-popup zan-popup--right {{showRightPopup?'zan-popup--show':''}}">
+        <view class="zan-btns">
+            <button bindtap="toggleRightPopup" class="zan-btn zan-btn--disabled">关闭</button>
+        </view>
+        <scroll-view scrollY class="express_list">
+            <view class="zan-cell zan-cell">
+                <view class="zan-cell__bd">
+                    <template is="zan-steps" data="{{type:'vertical',hasDesc:true,steps:expressdata}}"></template>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="footer_box" s-if="{{sets.kefutype>0&&order.status<=3||order.status==0&&order.paytype==0||order.status>=2&&order.taketype==1&&order.expressname||order.status==1&&order.taketype==2||order.status==2}}">
+        <view class="item_cell_box order_foot">
+            <view class="item_cell_flex"></view>
+            <button bindtap="{{sets.kefutype==1?'callphone':sets.kefutype==3?'weburl':sets.kefutype==4?'showkefuimg':''}}" class="bot_btn click_button" data-img="{{sets.kefuimg}}" data-tel="{{sets.kefutel}}" data-url="{{sets.kefuurl}}" hoverClass="none" openType="{{sets.kefutype==2?'contact':''}}" sessionFrom="orderkefu" s-if="{{sets.kefutype>0&&order.status<=3}}">联系客服</button>
+            <view bindtap="dealorder" class="bot_btn" data-type="cancel" s-if="{{order.status==0&&order.paytype==0}}">取消订单</view>
+            <view bindtap="dealorder" class="bot_btn bot_btn_pay" data-type="pay" s-if="{{order.status==0&&order.paytype==0}}">付款</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="express" s-if="{{order.status>=2&&order.taketype==1&&order.expressname}}">查看物流</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="call" s-if="{{order.status==1&&order.taketype==2}}">门店电话</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="toshop" s-if="{{order.status==1&&order.taketype==2}}">地图导航</view>
+            <view bindtap="dealorder" class="bot_btn" data-type="com" s-if="{{order.status==2}}">确认收货</view>
+        </view>
+    </view>
+</view>

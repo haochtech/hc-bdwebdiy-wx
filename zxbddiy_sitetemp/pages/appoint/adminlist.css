@@ -1,0 +1,124 @@
+page {
+    height: 100vh;
+}
+
+.zan-tab__item--selected .zan-tab__title {
+    color: #ed414a;
+    border-bottom: 2px solid #ed414a;
+}
+
+.zan-tab__bd--scroll .zan-tab__item {
+    min-width: 150rpx;
+}
+
+.orderlist_item {
+    background: #fff;
+    padding: 20rpx 10rpx;
+    margin-bottom: 20rpx;
+}
+
+.orderlist_top {
+    font-size: 28rpx;
+    color: #333;
+    margin-bottom: 20rpx;
+}
+
+.orderlist_top .zan-tab__bd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.orderlist_status {
+    color: #ed414a;
+}
+
+.orderlist_mid_item {
+    padding: 20rpx 10rpx;
+    background: #f1f1f1;
+    border-bottom: 1px solid #fff;
+}
+
+.orderlist_item .zan-card__thumb {
+    width: 180rpx;
+    height: 180rpx;
+}
+
+.orderlist_item .zan-card__detail {
+    margin-left: 200rpx;
+}
+
+.bot_info {
+    font-size: 28rpx;
+    text-align: right;
+    padding: 10rpx;
+}
+
+.bot_info_num {
+    font-size: 34rpx;
+}
+
+.bot_btn_list {
+    padding: 10rpx;
+    text-align: right;
+    border-top: 1px solid #eee;
+}
+
+.bot_btn {
+    font-size: 28rpx!important;
+    display: inline-block!important;
+    padding: 5rpx 20rpx!important;
+    border: 1px solid #ddd!important;
+    color: #666!important;
+    margin-left: 30rpx!important;
+    border-radius: 5rpx!important;
+    line-height: 50rpx!important;
+}
+
+.bot_btn_pay {
+    color: #ed414a!important;
+    border: 1px solid #ed414a!important;
+}
+
+.orderlist_goods_title {
+    min-height: 80rpx;
+}
+
+.zan-steps__title {
+    display: block;
+}
+
+.zan-steps--vsteps .zan-steps__title--desc {
+    padding-left: 27px;
+}
+
+.zan-popup {
+    overflow-y: auto;
+}
+
+.zan-tab__bd {
+    height: inherit!important;
+}
+
+.orderlist_rule {
+    font-size: 26rpx;
+    line-height: 36rpx;
+}
+
+.zan-tab__item {
+    position: relative;
+}
+
+.zan-badge__count {
+    top: 2px;
+    right: 30rpx;
+}
+
+.form_pass_box {
+    margin-top: 200rpx;
+}
+
+.orderlist {
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+}

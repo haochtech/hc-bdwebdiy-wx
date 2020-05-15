@@ -1,0 +1,7 @@
+<view class="swiper" s-if="{{slider.length>0}}">
+    <swiper autoplay="{{true}}" duration="100" indicatorActiveColor="rgb(0, 181, 228)" indicatorColor="rgba(0, 0, 0, .3)" indicatorDots="{{true}}" interval="5000">
+        <swiper-item s-for="{{slider}}">
+            <image class="slide-image" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+</view>

@@ -1,0 +1,11 @@
+<view class="userinfo_box" s-if="{{showuserbtn}}">
+    <view bindtap="showuserbtn" catchtouchmove="true" class="mask"></view>
+    <view catchtouchmove="true" class="userinfo_body">
+        <view class="userinfo_tips">请点击授权会员信息</view>
+        <view class="userinfo_tips userinfo_tips2">以便为你提供服务</view>
+        <button bindtap="updateUserInfo" class="click_button" size="mini">
+            <view class="userinfo_btn" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">授权会员信息</view>
+        </button>
+        <icon bindtap="showuserbtn" class="close_btn" color="#ffffff" size="34" type="cancel"></icon>
+    </view>
+</view>

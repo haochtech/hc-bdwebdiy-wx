@@ -1,0 +1,86 @@
+.form_pass_box {
+    margin-top: 200rpx;
+}
+
+.form_list_item {
+    padding: 30rpx;
+    background: #fff;
+    margin: 10rpx;
+}
+
+.form_list_time {
+    padding-right: 20rpx;
+    font-size: 15px;
+}
+
+.sheet_box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: #fff;
+}
+
+.sheet_box_in {
+    padding: 20rpx;
+    padding-bottom: 100rpx;
+    border-bottom: 1px solid #ddd;
+    height: 90vh;
+    width: 100vw;
+}
+
+.sheet_tot {
+    position: fixed;
+    bottom: 0rpx;
+    width: 100%;
+    left: 0;
+}
+
+.sheet_box_l {
+    width: 25%;
+}
+
+.sheet_box_r {
+    padding-left: 20rpx;
+}
+
+.sheet_box_item {
+    border-bottom: 1px solid #eee;
+    padding: 20rpx 0;
+}
+
+.form_tab {
+    width: 600rpx;
+    margin: 0 auto;
+}
+
+.form_tab_item {
+    width: 300rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    background: #fff;
+    margin-top: 10rpx;
+    border: 1px solid #ddd;
+}
+
+.form_tab_act {
+    background: #ddd;
+    color: #fff;
+}
+
+.form_img {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 10rpx 10rpx 0;
+}
+
+.sheet_btn {
+    width: 50%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    color: #fff;
+}

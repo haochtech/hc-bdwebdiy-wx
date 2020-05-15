@@ -1,0 +1,45 @@
+<import src="../../resource/zan-ui/tab/index.swan"></import>
+<view class="page">
+    <view class="orderlist_top">
+        <template is="zan-tab" data="{{tab:tab,componentId:'tab'}}"></template>
+    </view>
+    <view class="goodlist_goodbox">
+        <view class="pagelist">
+            <view bindtap="navigateto" class="mycard_item" data-url="{{item.url+'&tid='+tid}}" s-for="{{datalist}}">
+                <view class="mycard_icon"></view>
+                <view class="item_cell_box mycard_item_in">
+                    <view class="mycard_item_l" s-if="{{item.type==0}}">
+                        <view class="mycard_value">￥ <text>{{item.value*100/100}}</text>
+                        </view>
+                        <view class="mycard_type">代金券</view>
+                    </view>
+                    <view class="mycard_item_l" s-if="{{item.type==1}}">
+                        <view class="mycard_value">
+                            <text>{{item.value*100/100}}</text> 折</view>
+                        <view class="mycard_type">折扣券</view>
+                    </view>
+                    <view class="item_cell_flex mycard_item_m">
+                        <view class="mycard_use" s-if="{{item.type==0}}">
+							满{{item.useleast*100/100}}减{{item.value*100/100}}
+						</view>
+                        <view class="mycard_use" s-if="{{item.type==1}}">
+							满{{item.useleast*100/100}}打{{item.value*100/100}}折
+						</view>
+                        <view class="mycard_time" s-if="{{item.status==0}}">{{item.time}} 前使用</view>
+                        <view class="mycard_time" s-if="{{item.status==1}}">已使用</view>
+                        <view class="mycard_time" s-if="{{item.status==2}}">已过期</view>
+                    </view>
+                    <view class="mycard_item_r">
+                        <view class="mycard_btn">查看</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>

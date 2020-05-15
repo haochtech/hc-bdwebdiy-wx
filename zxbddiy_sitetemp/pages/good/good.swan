@@ -1,0 +1,124 @@
+<block s-if="{{good}}">
+    <import src="../../resource/zan-ui/quantity/index.swan"></import>
+    <view>
+        <view class="page {{animation}}">
+         <swiper autoplay="true" duration="200" indicatorDots="true" interval="3000" style="width: 100%;height:{{swiperheight}}px;">
+                <swiper-item s-for="{{good.pic}}" s-for-item="img">
+                    <image bindload="imageLoad" class="slide-image" lazyLoad="true" mode="widthFix" src="{{img}}" style="width: 100%;height:{{swiperheight}}px;"></image>
+                </swiper-item>
+            </swiper>
+            <view class="good_title_box item_cell_box">
+                <view class="good_title item_cell_flex" style="text-align: {{sets.infotitle?sets.infotitle:'left'}}">
+			{{good.title}}
+		</view>
+                <button class="good_share click_button" openType="share">
+                    <image src="../../../images/share1.png"></image>
+                    <view class="share_text">分享</view>
+                </button>
+            </view>
+            <view class="good_desc" s-if="{{good.desc}}">
+		{{good.desc}}
+	</view>
+            <view class="good_price_box item_cell_box" s-if="{{good.isprice!=1&&!sets.infoprice}}">
+                <view class="item_cell_flex item_cell_box">
+                    <view class="nowprice" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">
+				￥<text class="nowprice_num">{{good.price}}</text>
+                        <text class="oldprice" s-if="{{good.oldprice*1>0}}"> ￥{{good.oldprice}}</text>
+                    </view>
+                </view>
+                <view class="good_sales" s-if="{{good.sales*1>0}}">已售{{good.sales}}件</view>
+            </view>
+            <view bindtap="toggleicon" class="good_icon_box zan-panel" s-if="{{good.icon.length>0}}">
+                <view class="zan-cell zan-cell--access">
+                    <view class="zan-cell__bd item_cell_box good_icon_in">
+                        <view class="good_icon_item" s-for="{{good.icon}}">
+                            <text class="zan-icon zan-icon-passed"></text>{{item.name}}
+				</view>
+                    </view>
+                    <view class="zan-cell__ft"></view>
+                </view>
+            </view>
+            <block s-if="{{good.content||good.parsevurl}}">
+                <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+                <view class="good_info_box zan-panel">
+                    <view class="good_info_title">商品详情</view>
+                    <view class="goodinfo_body">
+                        <video controls autoplay="{{false}}" objectFit="contain" src="{{good.parsevurl}}" style="width: 100%;" s-if="{{good.parsevurl}}"></video>
+                        <template is="bdParse" data="{{ {bdParseData:good.content.nodes} }}"></template>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="zan-dialog {{showbuy?'zan-dialog--show':''}}">
+            <view bindtap="togglebuy" class="zan-dialog__mask"></view>
+            <view class="zan-dialog__container">
+                <view class="goodbuy_box">
+                    <view class="goodbuy_top item_cell_box">
+                        <image class="goodbuy_top_img" src="{{good.thumb}}"></image>
+                        <view class="goodbuy_top_l item_cell_flex">
+                            <view class="goodbuy_top_title">{{good.title}}</view>
+                            <view class="goodbuy_top_price" style="color: {{bar.maincolor?bar.maincolor:'#ed414a'}}">￥{{good.price}}</view>
+                        </view>
+                        <view catchtap="togglebuy" class="goodbuy_top_close zan-icon zan-icon-close"></view>
+                    </view>
+                    <view class="goodbuy_rule" s-if="{{good.isrule==1}}">
+                        <view class="goodbuy_rule_item" s-for="{{rule}}">
+                            <view class="rule_item_title">{{item.pro.title}}</view>
+                            <view>
+                                <view catchtap="changeRule" class="rule_item_name {{item.actitem==in.id?'actrule':''}}" data-oid="{{item.pro.id}}" data-tid="{{in.id}}" style="background-color:{{item.actitem==in.id?bar.maincolor?bar.maincolor:'#ed414a':''}}" s-for="{{item.data}}" s-for-item="in">{{in.name}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="goodbuy_num item_cell_box">
+                        <view>
+                            <view class="goodbuy_name">购买数量：</view>
+                            <view class="goodbuy_num_last">剩余{{good.stock}}件</view>
+                        </view>
+                        <view class="item_cell_flex goodbuy_quantity">
+                            <template is="zan-quantity" data="{{{...quantity,componentId:'quantity',size:'small'}}}"></template>
+                        </view>
+                    </view>
+                    <view catchtap="confirmbuy" class="buy_confirm" data-type="buy" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}" s-if="{{showtype=='buy'}}">确定</view>
+                    <view catchtap="confirmbuy" class="buy_confirm cart_confirm" data-type="cart" s-if="{{showtype=='cart'}}">确定</view>
+                </view>
+            </view>
+        </view>
+        <view class="zan-dialog {{showicon?'zan-dialog--show':''}}">
+            <view bindtap="toggleicon" class="zan-dialog__mask"></view>
+            <view class="zan-dialog__container">
+                <view class="icon_box">
+                    <view class="icon_head">服务说明</view>
+                    <view class="icon_item item_cell_box" s-for="{{good.icon}}">
+                        <view class="icon_item_l zan-icon zan-icon-passed"></view>
+                        <view class="icon_item_r item_cell_flex">
+                            <view class="icon_item_name">{{item.name}}</view>
+                            <view class="icon_item_desc">{{item.desc}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="footer_box good_footer" s-if="{{from!='exbuy'&&!sets.infobuybtn&&good.iscanbuy!=1}}">
+            <view class="item_cell_box">
+                <button bindtap="botact" class="click_button footer_item footer_item_index" data-type="index">
+                    <view class="zan-icon zan-icon-home"></view>
+                    <view class="footer_item_name">首页</view>
+                </button>
+                <button bindtap="{{sets.kefutype==1?'callphone':sets.kefutype==3?'weburl':sets.kefutype==4?'showkefuimg':''}}" class="click_button footer_item footer_item_kefu" data-img="{{sets.kefuimg}}" data-tel="{{sets.kefutel}}" data-url="{{sets.kefuurl}}" hoverClass="none" openType="{{sets.kefutype==2?'contact':''}}" sessionFrom="goodkefu" s-if="{{sets.kefutype>0}}">
+                    <view class="zan-icon zan-icon-chat"></view>
+                    <view class="footer_item_name">客服</view>
+                </button>
+                <button bindtap="botact" class="click_button footer_item footer_item_cart" data-type="cart">
+                    <view class="zan-icon zan-icon-shopping-cart"></view>
+                    <view class="footer_item_name">购物车</view>
+                </button>
+                <button bindtap="botact" class="click_button footer_item footer_item_joincart" data-type="joincart">
+			加入购物车
+		</button>
+                <button bindtap="botact" class="click_button footer_item item_cell_flex footer_item_buy" data-type="buy" style="background-color: {{bar.maincolor?bar.maincolor:'#ed414a'}}!important">
+			立即购买
+		</button>
+            </view>
+        </view>
+    </view>
+</block>

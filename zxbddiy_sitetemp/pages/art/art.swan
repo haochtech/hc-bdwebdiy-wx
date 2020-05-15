@@ -1,0 +1,24 @@
+<view class="page" s-if="{{article}}">
+    <view class="art_head">
+        <view class="art_title">{{article.title}}</view>
+        <view class="art_time">
+            <text class="art_time_time"> {{article.time}} </text>
+            <text class="art_time_auth"> {{article.author}} </text>
+        </view>
+    </view>
+    <block s-if="{{article.content||article.parsevurl}}">
+        <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+        <view class="art_body">
+            <video controls autoplay="{{false}}" objectFit="contain" src="{{article.parsevurl}}" style="width: 100%;" s-if="{{article.parsevurl}}"></video>
+          
+          <!-- <template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />  -->
+            <template is="bdParse" data="{{ {bdParseData:article.content.nodes} }}"></template>
+        </view>
+    </block>
+    <view class="art_data item_cell_box">
+        <view>阅读 {{article.readed*1+article.falseview*1}}</view>
+    </view>
+</view>
+
+
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan" s-if="{{isfoot==1}}"></include>

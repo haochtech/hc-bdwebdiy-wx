@@ -1,0 +1,6 @@
+<block s-if="{{viceadarr}}">
+    <import src="/zxbddiy_sitetemp/resource/bdParse/bdParse.swan"></import>
+    <view bindtap="{{viceadarr.type=='tel'?'callphone':viceadarr.type=='images'?'showimages':viceadarr.type?viceadarr.type:''}}" class="temp_copyright" data-appid="{{viceadarr.params.appid}}" data-appurl="{{viceadarr.params.appurl}}" data-img="{{viceadarr.params.pic}}" data-tel="{{viceadarr.params.tel}}" data-url="{{viceadarr.params.url}}" data-weburl="{{viceadarr.params.weburl}}" sessionFrom="{{viceadarr.params.sfrom}}">
+        <template is="bdParse" data="{{ {bdParseData:vicead.nodes} }}"></template>
+    </view>
+</block>

@@ -1,0 +1,102 @@
+<view s-if="{{order}}">
+    <view class="page">
+        <view class="orderinfo_address item_cell_box" s-if="{{order.taketype==1&&order.deskid<=0}}">
+            <view class="zan-icon zan-icon-location"></view>
+            <view class="item_cell_flex">
+                <view>
+                    <text>{{order.address.name}}</text>
+                    <text class="orderinfo_tel">{{order.address.tel}}</text>
+                </view>
+                <view>
+                    <view class="orderinfo_add">
+	    				{{order.address.address}}
+	    			</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_shop" s-if="{{order.taketype==2&&order.status==1}}">
+            <view class="orderinfo_shop_t item_cell_box">
+                <view class="orderinfo_shop_l">自提门店</view>
+                <view class="item_cell_flex orderinfo_shop_r">
+                    <view>{{sets.shopname}} <text class="orderinfo_tel">{{sets.shoptel}}</text>
+                    </view>
+                    <view class="orderinfo_add">{{sets.shopaddress}}</view>
+                </view>
+            </view>
+            <view class="orderinfo_qr item_cell_box">
+                <view class="orderinfo_qr_l">兑取图码</view>
+                <view class="orderinfo_qr_r">
+                    <image mode="widthFix" src="{{qrcode}}"></image>
+                    <view class="orderinfo_shop_tip">提示:到门店后出示上方二维码兑取</view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_goods mt20">
+            <view class="zan-card orderlist_mid_item">
+                <view class="zan-card__thumb">
+                    <image class="zan-card__img" mode="aspectFit" src="{{order.appoint.thumb}}"></image>
+                </view>
+                <view class="zan-card__detail">
+                    <view class="zan-card__detail-row">
+			          	{{order.appoint.name}}
+			        </view>
+                    <view class="zan-card__detail-row zan-c-gray-darker">
+			          	{{order.appoint.desc}}
+			        </view>
+                </view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20">
+            <view class="data_item formdata_item item_cell_box">
+                <view class="formdata_l">预约编号</view>
+                <view class="item_cell_flex formdata_r">{{order.id}}</view>
+            </view>
+            <view class="data_item formdata_item item_cell_box">
+                <view class="formdata_l">预约状态</view>
+                <view class="item_cell_flex formdata_r">
+					{{order.status==0?'待支付':''}}
+					{{order.status==1?'待接单':''}}
+					{{order.status==2?'已接单':''}}
+					{{order.status==3?'已完成':''}}
+					{{order.status==4?'已取消':''}}
+					{{order.status==5?'已退款':''}}
+				</view>
+            </view>
+            <view class="data_item formdata_item item_cell_box" s-if="{{order.apptime}}">
+                <view class="formdata_l">预约时间</view>
+                <view class="item_cell_flex formdata_r">{{order.apptime}}</view>
+            </view>
+            <view class="data_item formdata_item item_cell_box">
+                <view class="formdata_l">提交时间</view>
+                <view class="item_cell_flex formdata_r">{{order.createtime}}</view>
+            </view>
+            <view class="data_item formdata_item item_cell_box" s-if="{{order.ispay==1}}">
+                <view class="formdata_l">支付金额</view>
+                <view class="item_cell_flex formdata_r">¥ {{order.fee}}</view>
+            </view>
+            <view class="data_item formdata_item item_cell_box" s-if="{{order.appoint.tips}}">
+                <view class="formdata_l">提示内容</view>
+                <view class="item_cell_flex formdata_r">{{order.appoint.tips}}</view>
+            </view>
+        </view>
+        <view class="orderinfo_data mt20" s-if="{{order.form.length>0}}">
+            <view class="data_item formdata_item item_cell_box" s-for="{{order.form}}">
+                <view class="formdata_l">{{item.name}}</view>
+                <view class="item_cell_flex formdata_r " s-if="{{item.type=='img'}}">
+                    <image bindtap="showimages" class="orderinfo_img" data-img="{{item.value}}" data-src="{{in}}" src="{{in}}" s-for="{{item.value}}" s-for-item="in"></image>
+                </view>
+                <view class="item_cell_flex formdata_r" s-elif="{{item.isarray==1}}">
+                    <text s-for="{{item.value}}" s-for-item="in">{{in}}</text>
+                </view>
+                <view class="item_cell_flex formdata_r" s-else>{{item.value}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer_box" s-if="{{sets.apkefutype>0||order.status==0&&order.ispay==1||order.status==0&&order.ispay==1}}">
+        <view class="item_cell_box order_foot">
+            <view class="item_cell_flex"></view>
+            <button bindtap="{{sets.apkefutype==1?'callphone':sets.apkefutype==3?'weburl':sets.apkefutype==4?'showkefuimg':''}}" class="bot_btn click_button" data-img="{{sets.apkefuimg}}" data-tel="{{sets.apkefutel}}" data-url="{{sets.apkefuurl}}" hoverClass="none" openType="{{sets.apkefutype==2?'contact':''}}" sessionFrom="apporderkefu" s-if="{{sets.apkefutype>0}}">联系客服</button>
+            <view bindtap="dealorder" class="bot_btn bot_btn_pay" data-type="pay" s-if="{{order.status==0&&order.fee>0}}">付款</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,60 @@
+<view class="page">
+    <view class="goodlist_headbox">
+        <view class="goodlist_head" s-if="{{twosort&&isshowtopsort}}">
+            <view class="goodlist_headlist">
+                <view bindtap="changeSort" class="gsort_item {{actsort==0?'gsort_act':''}}" data-id="0" style="{{actsort==0?'border-bottom:1px solid '+(bar.maincolor?bar.maincolor:'#ed414a'):''}};{{actsort==0?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">
+					全部
+				</view>
+                <view bindtap="changeSort" class="gsort_item {{item.id==actsort?'gsort_act':''}}" data-id="{{item.id}}" style="{{item.id==actsort?'border-bottom:1px solid '+(bar.maincolor?bar.maincolor:'#ed414a'):''}};{{item.id==actsort?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}" s-for="{{twosort}}">
+					{{item.name}}
+				</view>
+            </view>
+            <view class="head_search"></view>
+        </view>
+        <view class="goodlist_top item_cell_box">
+            <view bindtap="changeorder" class="goodlist_order_item {{page.pdata.otype==0?'order_act':''}}" data-type="0" style="{{page.pdata.otype==0?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">综合</view>
+            <view bindtap="changeorder" class="goodlist_order_item {{page.pdata.otype==1?'order_act':''}}" data-type="1" style="{{page.pdata.otype==1?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">销量</view>
+            <view bindtap="changeorder" class="goodlist_order_item {{page.pdata.otype==2?'order_act':''}}" data-type="2" style="{{page.pdata.otype==2?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">新品</view>
+            <view bindtap="changeorder" class="goodlist_order_item {{page.pdata.otype==3?'order_act':''}}" data-type="3" style="{{page.pdata.otype==3?'color:'+(bar.maincolor?bar.maincolor:'#ed414a'):''}}">
+                <view class="item_cell_box order_byprice_box">
+                    <view>价格</view>
+                    <view class="order_byprice_icon">
+                        <image mode="widthFix" src="../../../images/{{page.pdata.otype==3?page.pdata.priceo?'ind_mall_price_desc.png':'ind_mall_price_asc.png':'ind_mall_price_unselected.png'}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="goodlist_goodbox" style="margin-top:{{twosort?'190rpx':'100rpx'}}">
+        <view class="pagelist">
+            <block s-for="{{datalist}}">
+            <view catchtap="goodinfo" class="goodlist_item" data-url="{{item.url}}" s-if="{{datalist.length>0}}">
+                <view class="goodlist_item_in">
+                    <view class="gooditem_top">
+                        <image mode="widthFix" src="{{item.thumb}}"></image>
+                    </view>
+                    <view class="gooditem_title" style="text-align:{{sets.titlepos}}" s-if="{{sets.listtitle==0}}">{{item.title}}</view>
+                    <view class="gooditem_bot item_cell_box" s-if="{{sets.listprice==0}}">
+                        <view class="gooditem_bot_l item_cell_flex">
+                            <view>
+                                <text class="nowprice">￥{{item.price*100/100}}</text>
+                                <text class="oldprice" s-if="{{item.oldprice*1>0}}">￥{{item.oldprice*100/100}}</text>
+                            </view>
+                            <view class="goodlist_sales">已售{{item.sales}}件</view>
+                        </view>
+                        <view class="gooditem_bot_r">
+                            <view class="buy_icon">购买</view>
+                        </view>
+                    </view>
+                </view> 
+            </view>
+            </block> 
+        </view>
+        <view class="pagelist_nodata" s-if="{{datalist.length<=0&&!doing}}">没有数据</view>
+        <view class="pagelist_tobot {{page.nodataf&&datalist.length>0?'show':''}}">到底了</view>
+        <view class="pagelist_wait {{page.waitf?'show':''}}">
+            <image src="/images/loading.gif"></image>
+        </view>
+    </view>
+</view>
+<include src="/zxbddiy_sitetemp/pages/common/footer.swan"></include>
